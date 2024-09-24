@@ -66,44 +66,43 @@ document.querySelector('audio').volume = 0.5;
 
 // List of random YouTube video IDs
 const videoIDs = [
-  'YQRXJVF8lic', // Replace with your own video IDs
+  'yb6vArLA9cA',
   'eD81CsAFmDU',
   'coRWtkRpNhw',
   'f7nPA1oEbqg',
   'OLS9yCmYfNw',
-'0r2x7G0hwCw',
-'V6SR4lNqjME',
-'nD1f1Ian0kA',
-'Mks-Y_PF_7o',
-'F7SWoZNpSVw',
-'2WcIK_8f7oQ',
-'8AHCfZTRGiI',
-'FDFqzVy2nI0',
-'VYOjWnS4cMY',
-'kn2f1AVB9W4',
-'ft3b1-Cm-0M',
-'6qIYgwebhM',
-'PENk6NBEyPs',
-'qkNa5xzOe5U',
-'kF7DW_mZatA',
-'93axfl2xlao',
-'zfaOf70M4xs',
-'CZRH68Ib1Ko',
-'N-aK6JnyFmk',
-'Vrs0XgnXsxk',
-'VwBIVWX8YtQ',
-'K4_Qzx-E2LQ',
-'HyHNuVaZJ-k',
-'LGQCPOMcYJQ',
-'e4QGnppJ-ys',
-'gxEPV4kolz0',
-'m2uTFF_3MaA',
-'TbSm6HsX_ek',
-'phfjlcGlT3g',
-'JM20K--96BE',
-'AfkF30yPfK0',
-'VcfIsVNp4js',
-
+  '0r2x7G0hwCw',
+  'V6SR4lNqjME',
+  'nD1f1Ian0kA',
+  'Mks-Y_PF_7o',
+  'F7SWoZNpSVw',
+  '2WcIK_8f7oQ',
+  '8AHCfZTRGiI',
+  'FDFqzVy2nI0',
+  'VYOjWnS4cMY',
+  'kn2f1AVB9W4',
+  'ft3b1-Cm-0M',
+  '6qIYgwebhM',
+  'PENk6NBEyPs',
+  'qkNa5xzOe5U',
+  'kF7DW_mZatA',
+  '93axfl2xlao',
+  'zfaOf70M4xs',
+  'CZRH68Ib1Ko',
+  'N-aK6JnyFmk',
+  'Vrs0XgnXsxk',
+  'VwBIVWX8YtQ',
+  'K4_Qzx-E2LQ',
+  'HyHNuVaZJ-k',
+  'LGQCPOMcYJQ',
+  'e4QGnppJ-ys',
+  'gxEPV4kolz0',
+  'm2uTFF_3MaA',
+  'TbSm6HsX_ek',
+  'phfjlcGlT3g',
+  'JM20K--96BE',
+  'AfkF30yPfK0',
+  'VcfIsVNp4js',
 ];
 
 // Function to load a YouTube video
@@ -127,6 +126,7 @@ function onYouTubeIframeAPIReady() {
 // When the player is ready
 function onPlayerReady(event) {
   event.target.mute(); // Ensure it's muted
+  startAtRandomTime(); // Start the current video at a random time
   changeVideo(); // Start changing videos randomly
 }
 
@@ -139,6 +139,18 @@ function getRandomVideoID() {
 function changeVideo() {
   setInterval(() => {
     const randomVideoID = getRandomVideoID();
-    player.loadVideoById(randomVideoID);
+    const videoDuration = player.getDuration(); // Get the duration of the current video
+    const randomStartTime = Math.floor(Math.random() * videoDuration); // Random time within the video duration
+    player.loadVideoById({
+      videoId: randomVideoID,
+      startSeconds: randomStartTime // Start at a random time
+    });
   }, Math.random() * (15000 - 5000) + 5000); // Random interval between 5-15 seconds
+}
+
+// Function to start the current video at a random time
+function startAtRandomTime() {
+  const videoDuration = player.getDuration(); // Get the duration of the current video
+  const randomStartTime = Math.floor(Math.random() * videoDuration); // Random time within the video duration
+  player.seekTo(randomStartTime, true); // Start at a random point in the current video
 }
