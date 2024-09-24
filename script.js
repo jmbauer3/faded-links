@@ -33,13 +33,13 @@ function addComment() {
   // Add upvotes with thumbs up icon
   const upvotes = document.createElement('span');
   upvotes.className = 'upvotes';
-  upvotes.innerHTML = `<i class="fas fa-thumbs-up"></i> ${Math.floor(Math.random() * 10)}`; // 0-9 upvotes
+  upvotes.innerHTML = `<i class="fas fa-thumbs-up"></i> ${Math.floor(Math.random() * 8)}`; // 0-7 upvotes
   commentElement.appendChild(upvotes);
 
   // Add random comments count with speech bubble icon
   const commentsBubble = document.createElement('span');
   commentsBubble.className = 'commentsBubble';
-  commentsBubble.innerHTML = `<i class="fas fa-comment"></i> ${Math.floor(Math.random() * 5)}`; // 0-4 comments
+  commentsBubble.innerHTML = `<i class="fas fa-comment"></i> ${Math.floor(Math.random() * 4)}`; // 0-3 comments
   commentElement.appendChild(commentsBubble);
 
   // Add the comment to the feed
@@ -69,10 +69,30 @@ document.querySelector('audio').volume = 0.5;
 
 // List of random YouTube video IDs
 const videoIDs = [
-  'dQw4w9WgXcQ', // Replace with your own video IDs
-  '3JZ_D3ELwOQ',
-  'e-ORhEE9VVg',
-  'tVj0ZTS4WF4'
+  'YQRXJVF8lic', // Replace with your own video IDs
+  'eD81CsAFmDU',
+  'coRWtkRpNhw',
+  'f7nPA1oEbqg'
+  'OLS9yCmYfNw'
+'0r2x7G0hwCw'
+'V6SR4lNqjME'
+'nD1f1Ian0kA'
+'Mks-Y_PF_7o'
+'F7SWoZNpSVw'
+'2WcIK_8f7oQ'
+'8AHCfZTRGiI'
+'FDFqzVy2nI0'
+'VYOjWnS4cMY'
+'kn2f1AVB9W4'
+'ft3b1-Cm-0M'
+'6qIYgwebhM'
+'PENk6NBEyPs'
+'qkNa5xzOe5U'
+'kF7DW_mZatA'
+'93axfl2xlao'
+'zfaOf70M4xs'
+'CZRH68Ib1Ko'
+'N-aK6JnyFmk'
 ];
 
 // Function to load a YouTube video
