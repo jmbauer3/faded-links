@@ -1,5 +1,7 @@
 let comments = []; // Empty array to store comments from the CSV
 const maxComments = 10; // Maximum number of comments before deleting old ones
+const recentlyDisplayed = []; // Array to store recently displayed comments
+const displayLimit = 5; // Limit for how many recently displayed comments to track
 
 // Fetch comments from the CSV file
 fetch('comments.csv')
@@ -17,15 +19,20 @@ function startCommentFeed() {
 
 // Function to add a comment to the feed
 function addComment() {
-  // Generate a random index
-  const randomIndex = Math.floor(Math.random() * comments.length);
+  let randomIndex;
+  let selectedComment;
+
+  do {
+    randomIndex = Math.floor(Math.random() * comments.length);
+    selectedComment = comments[randomIndex].trim(); // Trim to remove extra spaces
+  } while (recentlyDisplayed.includes(selectedComment));
 
   const commentElement = document.createElement('div');
   commentElement.className = 'comment';
 
   // Add comment text
   const commentText = document.createElement('p');
-  commentText.textContent = comments[randomIndex].trim(); // Trim to remove extra spaces
+  commentText.textContent = selectedComment;
   commentElement.appendChild(commentText);
 
   // Add upvotes with thumbs up icon
@@ -55,6 +62,14 @@ function addComment() {
     setTimeout(() => {
       oldestComment.remove();
     }, 1000); // Wait for the fade-out animation to complete
+  }
+
+  // Add the selected comment to the recently displayed array
+  recentlyDisplayed.push(selectedComment);
+
+  // If we exceed the display limit, remove the oldest from recently displayed
+  if (recentlyDisplayed.length > displayLimit) {
+    recentlyDisplayed.shift(); // Remove the oldest comment
   }
 }
 
