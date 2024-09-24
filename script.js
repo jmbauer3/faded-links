@@ -148,10 +148,9 @@ function changeVideo() {
   }, Math.random() * (15000 - 5000) + 5000); // Random interval between 5-15 seconds
 }
 
-// Function to get a random start time within the video duration, avoiding the very end
-function getRandomStartTime(player) {
-  const duration = player.getDuration(); // Get video duration
-  const maxStart = duration - 15; // Ensure it doesn't start within the last 15 seconds
-  return Math.floor(Math.random() * maxStart); // Random start time within the safe range
+// Function to start the current video at a random time
+function startAtRandomTime() {
+  const videoDuration = player.getDuration(); // Get the duration of the current video
+  const randomStartTime = Math.floor(Math.random() * videoDuration); // Random time within the video duration
+  player.seekTo(randomStartTime, true); // Start at a random point in the current video
 }
-
