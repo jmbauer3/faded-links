@@ -18,7 +18,7 @@ body {
   padding-top: 100px; /* Space for fixed title and music player */
   margin: 0 auto;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-  background-color: #2c2c54;
+  background-color: rgba(44, 44, 84, 0.8); /* Adjusted for transparency */
   border-radius: 10px;
   position: relative;
 }
