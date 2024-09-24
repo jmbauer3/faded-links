@@ -116,7 +116,7 @@ body {
   position: absolute; /* Position to fill the container */
   top: 0; /* Align to the top */
   left: 0; /* Align to the left */
-  width: 100%; /* Full width */
+  width: auto; /* Auto width to allow for cropping */
   height: 100%; /* Full height to fit vertical space */
   pointer-events: none; /* Disable interaction with the video */
 }
