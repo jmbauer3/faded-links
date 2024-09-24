@@ -1,51 +1,71 @@
-// Load comments from CSV file
-async function loadComments() {
-  const response = await fetch('comments.csv');
-  const text = await response.text();
+// Example comments list
+const comments = [
+  "I can't believe this is what we've come to.",
+  "Another day, another pointless scroll.",
+  "Has anyone else noticed the algorithm is broken?",
+  "Life used to be simple. Now it's just endless noise.",
+  "Does anyone even care anymore?",
+  "The signal has faded, but we're still here.",
+  "Echoes of better times... lost in the noise.",
+  "This place feels like a dream, but a fading one.",
+  "Where did everyone go? It's like a ghost town.",
+  "Endless scrolling, and yet, nothing to find."
+];
 
-  // Split comments into an array
-  const commentsArray = text.split('\n').map(line => line.replace(/"/g, '').trim()).filter(line => line);
+const feed = document.getElementById('feed');
+let commentIndex = 0;
+const maxComments = 10; // Maximum number of comments before deleting old ones
 
-  return commentsArray;
+// Example comments list remains the same
+
+function addComment() {
+  if (commentIndex >= comments.length) {
+    commentIndex = 0; // Reset the index if we've shown all comments
+  }
+
+  const commentElement = document.createElement('div');
+  commentElement.className = 'comment';
+
+  // Add comment text
+  const commentText = document.createElement('p');
+  commentText.textContent = comments[commentIndex];
+  commentElement.appendChild(commentText);
+
+  // Add upvotes with thumbs up icon
+  const upvotes = document.createElement('span');
+  upvotes.className = 'upvotes';
+  upvotes.innerHTML = `<i class="fas fa-thumbs-up"></i> ${Math.floor(Math.random() * 1000)}`;
+  commentElement.appendChild(upvotes);
+
+  // Add random comments count with speech bubble icon
+  const commentsBubble = document.createElement('span');
+  commentsBubble.className = 'commentsBubble';
+  commentsBubble.innerHTML = `<i class="fas fa-comment"></i> ${Math.floor(Math.random() * 200)}`; // Random comments count
+  commentElement.appendChild(commentsBubble);
+
+  // Add the comment to the feed
+  feed.appendChild(commentElement);
+
+  // Scroll to the bottom of the feed
+  feed.scrollTop = feed.scrollHeight;
+
+  // Check if there are too many comments
+  if (feed.children.length > maxComments) {
+    // Fade out the oldest comment before removing it
+    const oldestComment = feed.children[0];
+    oldestComment.classList.add('fadeOut');
+    setTimeout(() => {
+      oldestComment.remove();
+    }, 1000); // Wait for the fade-out animation to complete
+  }
+
+  commentIndex++;
 }
 
-// Get a random upvote count
-function getRandomUpvotes() {
-  return Math.floor(Math.random() * 1000);
-}
 
-// Randomly fluctuate the upvotes
-function fluctuateUpvotes(element) {
-  setInterval(() => {
-    const currentUpvotes = parseInt(element.textContent);
-    const randomFluctuation = Math.floor(Math.random() * 10) - 5; // Random +/- fluctuation
-    element.textContent = currentUpvotes + randomFluctuation;
-  }, 2000); // Change every 2 seconds
-}
+// Add a new comment every 3 seconds
+setInterval(addComment, 3000);
 
-// Add comments to the feed
-async function populateFeed() {
-  const feed = document.getElementById('feed');
-  const comments = await loadComments();
 
-  comments.forEach(comment => {
-    const commentElement = document.createElement('div');
-    commentElement.className = 'comment';
-
-    const commentText = document.createElement('p');
-    commentText.textContent = comment;
-
-    const upvotes = document.createElement('span');
-    upvotes.className = 'upvotes';
-    upvotes.textContent = getRandomUpvotes();
-
-    fluctuateUpvotes(upvotes); // Fluctuate the upvotes over time
-
-    commentElement.appendChild(commentText);
-    commentElement.appendChild(upvotes);
-    feed.appendChild(commentElement);
-  });
-}
-
-// Run the function to populate the feed
-populateFeed();
+document.getElementById('bg-music').volume = 0.5; // Adjust volume (0.0 to 1.0)
+audioElement.play();
