@@ -1,58 +1,26 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #111;
-  color: #f4f4f4;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-.container {
-  max-width: 600px;
-  width: 100%;
+  background-color: #f4f4f4;
+  color: #333;
   padding: 20px;
 }
 
-h1 {
-  text-align: center;
-  font-size: 2rem;
-  margin-bottom: 20px;
-}
-
-.feed {
-  border: 1px solid #444;
-  padding: 10px;
-  background-color: #222;
-  height: 300px;
-  overflow-y: scroll;
+#feed {
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .comment {
-  border-bottom: 1px solid #555;
-  padding: 10px 0;
-}
-
-.comment p {
-  margin: 5px 0;
+  background-color: white;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .upvotes {
-  color: #666;
-  font-size: 0.9rem;
-}
-
-button {
   display: block;
-  margin: 20px auto;
-  padding: 10px 20px;
-  background-color: #333;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #555;
+  font-size: 0.9em;
+  color: gray;
+  margin-top: 5px;
 }

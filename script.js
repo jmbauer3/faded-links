@@ -1,62 +1,51 @@
-// Your OpenAI API Key
-const apiKey = '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';
+// Load comments from CSV file
+async function loadComments() {
+  const response = await fetch('comments.csv');
+  const text = await response.text();
 
-// Fetch GPT-generated comments
-async function getAIComment() {
-  try {
-    const response = await fetch('https://api.openai.com/v1/completions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${apiKey}`
-      },
-      body: JSON.stringify({
-        model: 'text-davinci-003', // You can use 'gpt-4' or another model, depending on your plan
-        prompt: "Generate a social media comment about disillusionment with technology.",
-        max_tokens: 50,
-        temperature: 0.7 // Adjust this value to control randomness
-      })
-    });
+  // Split comments into an array
+  const commentsArray = text.split('\n').map(line => line.replace(/"/g, '').trim()).filter(line => line);
 
-    const data = await response.json();
-    
-    // Return the generated text from ChatGPT
-    return data.choices[0].text.trim();
-  } catch (error) {
-    console.error("Error fetching AI comment:", error);
-    return "Something went wrong... even for an AI!";
-  }
+  return commentsArray;
 }
 
-// Simulate random upvotes
+// Get a random upvote count
 function getRandomUpvotes() {
   return Math.floor(Math.random() * 1000);
 }
 
-// Add AI comment to feed
-async function addAICommentToFeed() {
-  const feed = document.getElementById('feed');
-  
-  // Fetch AI comment
-  const commentText = await getAIComment();
-  
-  const commentElement = document.createElement('div');
-  commentElement.className = 'comment';
-  
-  const commentTextElement = document.createElement('p');
-  commentTextElement.textContent = commentText;
-  
-  const upvotesElement = document.createElement('span');
-  upvotesElement.className = 'upvotes';
-  upvotesElement.textContent = `${getRandomUpvotes()} upvotes`;
-  
-  commentElement.appendChild(commentTextElement);
-  commentElement.appendChild(upvotesElement);
-  
-  feed.appendChild(commentElement);
+// Randomly fluctuate the upvotes
+function fluctuateUpvotes(element) {
+  setInterval(() => {
+    const currentUpvotes = parseInt(element.textContent);
+    const randomFluctuation = Math.floor(Math.random() * 10) - 5; // Random +/- fluctuation
+    element.textContent = currentUpvotes + randomFluctuation;
+  }, 2000); // Change every 2 seconds
 }
 
-// Load more AI-generated posts when button is clicked
-document.getElementById('loadMore').addEventListener('click', () => {
-  addAICommentToFeed();
-});
+// Add comments to the feed
+async function populateFeed() {
+  const feed = document.getElementById('feed');
+  const comments = await loadComments();
+
+  comments.forEach(comment => {
+    const commentElement = document.createElement('div');
+    commentElement.className = 'comment';
+
+    const commentText = document.createElement('p');
+    commentText.textContent = comment;
+
+    const upvotes = document.createElement('span');
+    upvotes.className = 'upvotes';
+    upvotes.textContent = getRandomUpvotes();
+
+    fluctuateUpvotes(upvotes); // Fluctuate the upvotes over time
+
+    commentElement.appendChild(commentText);
+    commentElement.appendChild(upvotes);
+    feed.appendChild(commentElement);
+  });
+}
+
+// Run the function to populate the feed
+populateFeed();
