@@ -102,23 +102,21 @@ body {
 
 
 #video-background {
-  position: fixed; /* Cover the entire screen */
+  position: fixed; /* Ensure it covers the entire screen */
   top: 0;
   left: 0;
-  width: 100vw; /* Full viewport width */
-  height: 100vh; /* Full viewport height */
-  z-index: -1; /* Behind all other elements */
-  overflow: hidden; /* Hide anything that spills over */
-  background-color: #000; /* Fallback background color */
+  width: 100vw; /* Full width */
+  height: 100vh; /* Full height */
+  z-index: -1; /* Behind everything */
+  overflow: hidden; /* Hide anything that overflows */
 }
 
 #player iframe {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100vw;
-  height: 100vh;
-  transform: translate(-50%, -50%); /* Center the video */
-  object-fit: cover; /* Ensures it zooms to fill the container */
-  pointer-events: none; /* Disable interactions */
+  top: 0;
+  left: 0;
+  width: 100vw; /* Force full width */
+  height: 100vh; /* Force full height */
+  object-fit: fill; /* Stretch video to fill container, even if distorted */
+  pointer-events: none; /* Prevent interaction */
 }
