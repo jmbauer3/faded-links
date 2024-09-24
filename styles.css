@@ -103,7 +103,7 @@ body {
 
 
 #video-background {
-  position: fixed; /* Make sure it covers the entire screen */
+  position: fixed; /* Ensure it covers the entire screen */
   top: 0;
   left: 0;
   width: 100%; /* Full width */
@@ -113,10 +113,10 @@ body {
 }
 
 #player {
-  position: absolute; /* Absolute positioning to fill its container */
+  position: absolute; /* Position to fill the container */
   top: 0; /* Align to the top */
   left: 0; /* Align to the left */
-  width: 100%; /* Full width of the container */
-  height: 100%; /* Full height of the container */
+  width: 100%; /* Full width */
+  height: 100%; /* Full height to fit vertical space */
   pointer-events: none; /* Disable interaction with the video */
 }
