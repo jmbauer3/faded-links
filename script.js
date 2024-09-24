@@ -1,5 +1,4 @@
 let comments = []; // Empty array to store comments from the CSV
-let commentIndex = 0;
 const maxComments = 10; // Maximum number of comments before deleting old ones
 
 // Fetch comments from the CSV file
@@ -18,16 +17,15 @@ function startCommentFeed() {
 
 // Function to add a comment to the feed
 function addComment() {
-  if (commentIndex >= comments.length) {
-    commentIndex = 0; // Reset the index if we've shown all comments
-  }
+  // Generate a random index
+  const randomIndex = Math.floor(Math.random() * comments.length);
 
   const commentElement = document.createElement('div');
   commentElement.className = 'comment';
 
   // Add comment text
   const commentText = document.createElement('p');
-  commentText.textContent = comments[commentIndex].trim(); // Trim to remove extra spaces
+  commentText.textContent = comments[randomIndex].trim(); // Trim to remove extra spaces
   commentElement.appendChild(commentText);
 
   // Add upvotes with thumbs up icon
@@ -58,8 +56,6 @@ function addComment() {
       oldestComment.remove();
     }, 1000); // Wait for the fade-out animation to complete
   }
-
-  commentIndex++;
 }
 
 
