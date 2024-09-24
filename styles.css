@@ -101,23 +101,34 @@ body {
 }
 
 
-
 #video-background {
-  position: fixed; /* Make sure it covers the entire screen */
+  position: fixed;
   top: 0;
   left: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  z-index: -1; /* Behind everything */
-  overflow: hidden; /* Hide overflow */
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  overflow: hidden;
 }
 
 #player {
-  position: absolute; /* Absolute positioning to fill its container */
-  object-fit: fill;
-  top: 0; /* Align to the top */
-  left: 0; /* Align to the left */
+  position: absolute;
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
   width: 100%; /* Full width of the container */
   height: 100%; /* Full height of the container */
+  transform: translate(-50%, -50%); /* Center it */
   pointer-events: none; /* Disable interaction with the video */
+}
+
+@media (max-height: 600px) { /* Adjust the threshold as needed */
+  #player {
+    transform: translate(-50%, -50%) scale(3); /* Zoom in */
+  }
+}
+
+@media (max-width: 600px) { /* Adjust the threshold as needed */
+  #player {
+    transform: translate(-50%, -50%) scale(3); /* Zoom in */
+  }
 }
