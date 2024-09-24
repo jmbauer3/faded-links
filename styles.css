@@ -106,23 +106,22 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw; /* Full viewport width */
-  height: 100vh; /* Full viewport height */
+  width: 100vw;
+  height: 100vh;
   z-index: -1; /* Behind everything */
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000; /* Optional: Add a black background in case video fails to load */
 }
 
-#player {
-  position: absolute;
-  top: 50%; /* Center the video vertically */
-  left: 50%; /* Center the video horizontally */
-  transform: translate(-50%, -50%); /* Center the video */
-  min-width: 100vw; /* Minimum width is full screen width */
-  min-height: 100vh; /* Minimum height is full screen height */
-  width: auto; /* Let the height dictate the size */
-  height: 100vh; /* Always fill the vertical space */
-  pointer-events: none; /* Disable interaction with the video */
-  object-fit: cover; /* Ensures the video fills and crops the sides */
+#player iframe {
+  width: 177.78vh; /* Keep the correct aspect ratio for YouTube videos (16:9) */
+  height: 100vh;
+  object-fit: cover; /* Ensures the video fills the vertical space and zooms/crops the sides */
+  pointer-events: none; /* Prevent interaction */
 }
+
 
 
