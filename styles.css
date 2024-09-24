@@ -101,22 +101,24 @@ body {
 }
 
 
-
 #video-background {
-  position: fixed; /* Make sure it covers the entire screen */
+  position: fixed; /* Cover the entire screen */
   top: 0;
   left: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  z-index: -1; /* Behind everything */
-  overflow: hidden; /* Hide overflow */
+  width: 100vw; /* Full viewport width */
+  height: 100vh; /* Full viewport height */
+  z-index: -1; /* Behind all other elements */
+  overflow: hidden; /* Hide anything that spills over */
+  background-color: #000; /* Fallback background color */
 }
 
-#player {
-  object-fit: fill; /* Absolute positioning to fill its container */
-  top: 0; /* Align to the top */
-  left: 0; /* Align to the left */
-  width: 100%; /* Full width of the container */
-  height: 100%; /* Full height of the container */
-  pointer-events: none; /* Disable interaction with the video */
+#player iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 100vh;
+  transform: translate(-50%, -50%); /* Center the video */
+  object-fit: cover; /* Ensures it zooms to fill the container */
+  pointer-events: none; /* Disable interactions */
 }
