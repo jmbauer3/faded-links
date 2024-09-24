@@ -155,9 +155,3 @@ function getRandomStartTime(player) {
   return Math.floor(Math.random() * maxStart); // Random start time within the safe range
 }
 
-// Optional: Pause video during buffering to prevent unintended glitches
-function onPlayerStateChange(event) {
-  if (event.data == YT.PlayerState.BUFFERING) {
-    player.pauseVideo();
-  }
-}
