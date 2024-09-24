@@ -72,27 +72,27 @@ const videoIDs = [
   'YQRXJVF8lic', // Replace with your own video IDs
   'eD81CsAFmDU',
   'coRWtkRpNhw',
-  'f7nPA1oEbqg'
-  'OLS9yCmYfNw'
-'0r2x7G0hwCw'
-'V6SR4lNqjME'
-'nD1f1Ian0kA'
-'Mks-Y_PF_7o'
-'F7SWoZNpSVw'
-'2WcIK_8f7oQ'
-'8AHCfZTRGiI'
-'FDFqzVy2nI0'
-'VYOjWnS4cMY'
-'kn2f1AVB9W4'
-'ft3b1-Cm-0M'
-'6qIYgwebhM'
-'PENk6NBEyPs'
-'qkNa5xzOe5U'
-'kF7DW_mZatA'
-'93axfl2xlao'
-'zfaOf70M4xs'
-'CZRH68Ib1Ko'
-'N-aK6JnyFmk'
+  'f7nPA1oEbqg',
+  'OLS9yCmYfNw',
+'0r2x7G0hwCw',
+'V6SR4lNqjME',
+'nD1f1Ian0kA',
+'Mks-Y_PF_7o',
+'F7SWoZNpSVw',
+'2WcIK_8f7oQ',
+'8AHCfZTRGiI',
+'FDFqzVy2nI0',
+'VYOjWnS4cMY',
+'kn2f1AVB9W4',
+'ft3b1-Cm-0M',
+'6qIYgwebhM',
+'PENk6NBEyPs',
+'qkNa5xzOe5U',
+'kF7DW_mZatA',
+'93axfl2xlao',
+'zfaOf70M4xs',
+'CZRH68Ib1Ko',
+'N-aK6JnyFmk',
 ];
 
 // Function to load a YouTube video
