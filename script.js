@@ -1,5 +1,4 @@
 let comments = []; // Empty array to store comments from the CSV
-let commentIndex = 0;
 const maxComments = 10; // Maximum number of comments before deleting old ones
 
 // Fetch comments from the CSV file
@@ -18,28 +17,28 @@ function startCommentFeed() {
 
 // Function to add a comment to the feed
 function addComment() {
-  if (commentIndex >= comments.length) {
-    commentIndex = 0; // Reset the index if we've shown all comments
-  }
+  // Select a random comment from the comments array
+  const randomIndex = Math.floor(Math.random() * comments.length);
+  const selectedComment = comments[randomIndex].trim(); // Trim to remove extra spaces
 
   const commentElement = document.createElement('div');
   commentElement.className = 'comment';
 
   // Add comment text
   const commentText = document.createElement('p');
-  commentText.textContent = comments[commentIndex].trim(); // Trim to remove extra spaces
+  commentText.textContent = selectedComment;
   commentElement.appendChild(commentText);
 
   // Add upvotes with thumbs up icon
   const upvotes = document.createElement('span');
   upvotes.className = 'upvotes';
-  upvotes.innerHTML = `<i class="fas fa-thumbs-up"></i> ${Math.floor(Math.random() * 10)}`; // 0-9 upvotes
+  upvotes.innerHTML = `<i class="fas fa-thumbs-up"></i> ${Math.floor(Math.random() * 8)}`; // 0-7 upvotes
   commentElement.appendChild(upvotes);
 
   // Add random comments count with speech bubble icon
   const commentsBubble = document.createElement('span');
   commentsBubble.className = 'commentsBubble';
-  commentsBubble.innerHTML = `<i class="fas fa-comment"></i> ${Math.floor(Math.random() * 5)}`; // 0-4 comments
+  commentsBubble.innerHTML = `<i class="fas fa-comment"></i> ${Math.floor(Math.random() * 4)}`; // 0-3 comments
   commentElement.appendChild(commentsBubble);
 
   // Add the comment to the feed
@@ -58,8 +57,6 @@ function addComment() {
       oldestComment.remove();
     }, 1000); // Wait for the fade-out animation to complete
   }
-
-  commentIndex++;
 }
 
 
