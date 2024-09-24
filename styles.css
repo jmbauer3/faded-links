@@ -103,20 +103,23 @@ body {
 
 
 #video-background {
-  position: fixed; /* Make sure it covers the entire screen */
+  position: fixed;
   top: 0;
   left: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  z-index: -1; /* Behind everything */
+  width: 100%; /* Ensure full width initially */
+  height: 100%; /* Ensure full height */
+  z-index: -1; /* Behind all content */
   overflow: hidden; /* Hide overflow */
 }
 
 #player {
-  position: absolute; /* Absolute positioning to fill its container */
-  top: 0; /* Align to the top */
-  left: 0; /* Align to the left */
-  width: 100%; /* Full width of the container */
-  height: 100%; /* Full height of the container */
-  pointer-events: none; /* Disable interaction with the video */
-}
+  position: absolute;
+  top: 0;
+  left: 50%; /* Center the video horizontally */
+  height: 100%; /* Make the video fill the full vertical space */
+  transform: translateX(-50%); /* Translate left to ensure the video remains centered */
+  width: auto; /* Set width to auto to maintain aspect ratio */
+  pointer-events: none; /* Disable interaction */
+
+
+
