@@ -106,7 +106,7 @@ body {
   position: fixed; /* Ensure it covers the entire screen */
   top: 0;
   left: 0;
-  width: 100%; /* Full width */
+  width: auto; /* Full width */
   height: 100%; /* Full height */
   z-index: -1; /* Behind everything */
   overflow: hidden; /* Hide overflow */
