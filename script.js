@@ -63,9 +63,6 @@ function addComment() {
 }
 
 
-// Add a new comment every 3 seconds
-setInterval(addComment, 3000);
-
 // Ensure the music starts at half volume
 document.querySelector('audio').volume = 0.5;
 
