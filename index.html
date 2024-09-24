@@ -8,16 +8,28 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-  <div id="feed">
-    <!-- We'll populate this area with text later -->
-    <h1 id="title">Faded Links</h1>
+
+  <!-- Video Background -->
+  <div id="video-background">
+    <div id="player"></div>
   </div>
-  <audio id="bg-music" autoplay loop>
-  <source src="assets/drunk-in-carthage.mp3" type="audio/mpeg">
-  Your browser does not support the audio element.
-  </audio>
-  <script src="script.js"></script>
+
+  <!-- Move title and music player outside the feed -->
+  <div id="header">
+    <h1 id="title">Faded Links</h1>
+    <div class="music-player">
+      <audio controls autoplay loop volume="0.5">
+        <source src="assets/drunk-in-carthage.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+  </div>
+
+  <div id="feed">
+    <!-- Comments will be dynamically loaded here -->
+  </div>
+
+  <script src="https://www.youtube.com/iframe_api"></script> <!-- YouTube API script -->
+  <script src="script.js"></script> <!-- Your JS code -->
 </body>
-
 </html>
-
