@@ -239,7 +239,7 @@ function getRandomVideoID() {
   'DkFJE8ZdeG8',
   'kes8cFqkHac',
   'sVZpHFXcFJw',
-  'K0eDlFX9GMc',
+  '0uEOIS_XojU',
   'bFUi7inkAbs',
   ];
   return videoIDs[Math.floor(Math.random() * videoIDs.length)];
@@ -269,3 +269,41 @@ function changeVideo() {
 
 // Ensure the music starts at half volume
 document.querySelector('audio').volume = 0.5;
+
+
+
+
+
+// Add event listeners for dynamically created comments
+document.addEventListener('click', (event) => {
+  // Like functionality
+  if (event.target.closest('.upvotes')) {
+    let likeIcon = event.target.closest('.upvotes').querySelector('i');
+    let likeCount = event.target.closest('.upvotes').textContent.trim().split(' ')[1]; 
+    likeCount = parseInt(likeCount);
+    likeIcon.classList.toggle('liked');
+    if (likeIcon.classList.contains('liked')) {
+      likeCount += 1;
+    } else {
+      likeCount -= 1;
+    }
+    event.target.closest('.upvotes').innerHTML = `<i class="fas fa-thumbs-up liked"></i> ${likeCount}`;
+  }
+  
+  // Comment functionality (e.g., reply box toggle)
+  if (event.target.closest('.commentsBubble')) {
+    let commentBox = event.target.closest('.comment').querySelector('.reply-box');
+    commentBox.style.display = (commentBox.style.display === 'none' || !commentBox.style.display) ? 'block' : 'none';
+  }
+  
+  // Handle reply submission
+  if (event.target.classList.contains('reply-submit')) {
+    const replyBox = event.target.previousElementSibling;
+    const userReply = replyBox.value.trim();
+    if (userReply !== "") {
+      const replyContainer = event.target.closest('.comment').querySelector('.user-reply');
+      replyContainer.innerHTML += `<p>${userReply}</p>`;
+      replyBox.value = ""; // Clear the input field after submission
+    }
+  }
+});
