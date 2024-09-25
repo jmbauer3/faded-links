@@ -23,25 +23,31 @@
             margin: 0;
             text-align: center;
             font-family: 'Courier New', Courier, monospace; /* Same font as Faded Links */
-            color: #b3b3d4; /* Changed to purple */
         }
         h1 {
-            margin-bottom: 20px; /* Space between title and subtitle */
+            margin-bottom: 10px; /* Reduced space between title and subtitle */
         }
         a {
-            color: #b3b3d4; /* Changed to purple for visibility */
+            color: #e4e6eb; /* Light text color */
             text-decoration: none; /* No underline */
             margin-top: 20px;
             transition: color 0.3s ease, text-shadow 0.3s ease; /* Smooth transitions */
         }
         a:hover {
-            color: #d1d1e9; /* Light gray on hover */
+            color: #b3b3d4; /* Light gray on hover */
             text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7); /* Enhance shadow on hover */
         }
+        .social-box {
+            background-color: rgba(50, 50, 70, 0.7); /* Slightly transparent background */
+            padding: 20px; /* Padding inside the box */
+            border-radius: 10px; /* Rounded corners */
+            margin-top: 20px; /* Space above the box */
+            text-align: center; /* Center the text inside the box */
+        }
         .credits {
-            margin-top: 40px;
+            margin-top: 20px; /* Adjusted space above credits */
             font-size: 0.8em;
-            color: #d1d1e9; /* Adjusted to match theme */
+            color: gray;
         }
         .video-wall {
             display: grid;
@@ -62,25 +68,27 @@
             color: #d1d1e9; /* Soft off-white text for info */
         }
     </style>
-    <link rel="icon" href="assets/favicon/favicon.ico" type="image"> <!-- Favicon added here -->
+      <link rel="icon" href="assets/favicon/favicon.ico" type="image"> <!-- Favicon added here -->
 </head>
 <body>
     <h1><a href="index.html">Why am I still awake?</a></h1> <!-- Made the title a link -->
     <h2>Why am I still here?</h2>
     
-    <div class="video-wall-info">
+    <div class="social-box">
         <a href="https://dumpl.ink/johnbauer" target="_blank">John M. Bauer—I am words and stories.</a>
-        <br> <!-- Added line break for spacing -->
+        <br>
         <a href="https://www.tiktok.com/@MobiusCoffee" target="_blank">Tiktok</a>
-        <br> <!-- Added line break for spacing -->
+        <br>
         <a href="https://www.twitter.com/@MobiusCoffee" target="_blank">Twitter</a>
-        <br> <!-- Added line break for spacing -->
+        <br>
         <a href="https://www.linkedin.com/in/jmbauer" target="_blank">LinkedIn</a>
     </div>
+    
     <div class="credits">
         <p>Background music: Drunk in Carthage by Ee</p>
+        <p>These are the videos found in the background of the main page.</p>
     </div>
-    <div class="credits">These are the videos found in the background of the main page.</div>
+    
     <div class="video-wall">
         <iframe src="https://www.youtube.com/embed/yb6vArLA9cA" allowfullscreen></iframe>
         <iframe src="https://www.youtube.com/embed/eD81CsAFmDU" allowfullscreen></iframe>
