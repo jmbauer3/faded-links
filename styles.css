@@ -78,6 +78,19 @@ body {
   display: inline-block; /* Change to inline */
 }
 
+/* New styles for the link */
+#title a {
+  color: #e4e6eb; /* Light text color */
+  text-decoration: none; /* No underline */
+  transition: color 0.3s ease, text-shadow 0.3s ease; /* Smooth transitions */
+}
+
+#title a:hover {
+  color: #b3b3d4; /* Light gray on hover */
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7); /* Enhance shadow on hover */
+}
+
+
 .music-player {
   display: inline-block; /* Align it with title */
   position: fixed;
