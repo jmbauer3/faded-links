@@ -149,8 +149,34 @@ body {
 
 /* Highlighted thumbs-up (like) button */
 .liked .fa-thumbs-up {
-  color: #ffd700; /* Gold color for the liked state */
-  transition: color 0.3s ease; /* Smooth transition */
+  color: #4a90e2; /* Blue color for the liked state */
+  transition: color 0.3s ease;
+}
+
+/* Keep the like counter's original color */
+.like-btn .like-counter {
+  color: #e4e6eb; /* Original color for the counter */
+}
+
+/* Like button clicked state */
+.like-btn.liked .fa-thumbs-up {
+  color: #4a90e2; /* Only change the thumbs-up icon color */
+}
+
+/* Make sure the counter does not change color on like */
+.like-btn .like-counter {
+  color: #b3b3d4; /* Original color for the counter */
+}
+
+/* Keep the layout of the like button stable */
+.like-btn {
+  display: flex;
+  align-items: center;
+}
+
+/* Optional: Additional spacing for the counter */
+.like-btn .like-counter {
+  margin-left: 4px; /* Adjust spacing if needed */
 }
 
 /* Reply (comment input) box */
@@ -211,7 +237,7 @@ body {
 
 /* Like button clicked state */
 .like-btn.liked {
-  color: #4b6587; /* Change color when liked */
+  color: #4a90e2; /* Change color when liked */
 }
 
 /* Make sure the like icon and comment icon maintain their structure */
@@ -237,8 +263,8 @@ body {
 
 .comment {
   position: relative;
-  margin: 10px 0;
-  padding-bottom: 50px; /* Add padding to make space for the comment input */
+  margin: 5px 0; /* Adjust to a smaller margin between comments */
+  padding-bottom: 30px; /* Also reduce the padding if needed for space */
 }
 
 .comment-btn {
@@ -271,23 +297,25 @@ body {
 
 
 .child-comment {
-  background-color: rgba(42, 42, 90, 0.8);
-  padding: 10px; /* Reduced padding */
-  margin-left: 15px; /* Adjusted left margin for indentation */
+  background-color: rgba(42, 42, 90, 0.8); /* Same background color */
+  padding: 10px; /* Same padding */
+  margin-left: 15px;
   margin-bottom: 8px;
   border-radius: 5px;
-  color: #d1d1e9;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  color: #d1d1e9; /* Same text color */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Same shadow */
+  font-size: 0.85em; /* Match the font size */
   position: relative;
 }
 
+/* Add the vertical line to the child comment */
 .child-comment::before {
   content: '';
   position: absolute;
-  left: -8px; /* Adjust left position */
+  left: -8px;
   top: 0;
   bottom: 0;
-  width: 3px; /* Slightly thinner line */
-  background-color: #4b6587; /* Subtle color fitting the theme */
-  border-radius: 2px;
+  width: 1px;
+  background-color: #4b6587;
+  border-radius: 1px;
 }
