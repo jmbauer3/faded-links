@@ -153,46 +153,31 @@ commentElement.appendChild(upvotes);
 document.addEventListener('click', (event) => {
   // Like functionality
   if (event.target.closest('.like-btn')) {
-    const upvoteElement = event.target.closest('.like-btn');
-    const likeIcon = upvoteElement.querySelector('i'); // Select the thumbs-up icon
-    let likeCountText = upvoteElement.querySelector('span').textContent;
+    const likeBtn = event.target.closest('.like-btn');
+    const likeIcon = likeBtn.querySelector('i'); // Select the thumbs-up icon
+    const likeCountElement = likeBtn.querySelector('.likeCount'); // Select the like count element
+    let likeCountValue = parseInt(likeCountElement.textContent);
 
     // Parse the like count safely
-    let likeCountValue = parseInt(likeCountText);
     if (isNaN(likeCountValue)) {
       likeCountValue = 0; // Default to 0 if parsing fails
     }
 
-    // Toggle the liked state and add/remove the class
-    if (likeIcon.classList.contains('liked')) {
-      likeIcon.classList.remove('liked'); // Remove the class if already liked
+    // Toggle the liked state and add/remove the class on the button
+    if (likeBtn.classList.contains('liked')) {
+      likeBtn.classList.remove('liked'); // Remove the class if already liked
       likeCountValue -= 1; // Decrease the like count
     } else {
-      likeIcon.classList.add('liked'); // Add the class if not liked
+      likeBtn.classList.add('liked'); // Add the class if not liked
       likeCountValue += 1; // Increase the like count
     }
 
-    // Update the inner HTML correctly
-    upvoteElement.querySelector('span').textContent = likeCountValue; // Update the count text
-  }
-
-  // Comment functionality (e.g., reply box toggle)
-  if (event.target.closest('.comment-btn')) {
-    let commentBox = event.target.closest('.comment').querySelector('.reply-box');
-    commentBox.style.display = (commentBox.style.display === 'none' || !commentBox.style.display) ? 'block' : 'none';
-  }
-
-  // Handle reply submission
-  if (event.target.classList.contains('reply-submit')) {
-    const replyBox = event.target.previousElementSibling;
-    const userReply = replyBox.value.trim();
-    if (userReply !== "") {
-      const replyContainer = event.target.closest('.comment').querySelector('.user-reply');
-      replyContainer.innerHTML += `<p>${userReply}</p>`;
-      replyBox.value = ""; // Clear the input field after submission
-    }
+    // Update the like count display
+    likeCountElement.textContent = likeCountValue; // Update the count text
   }
 });
+
+
 
 
 
