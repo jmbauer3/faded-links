@@ -90,52 +90,92 @@
     <p>Background videos:</p>
 </div>
 
-    <div class="video-wall">
-        <iframe src="https://www.youtube.com/embed/yb6vArLA9cA" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/eD81CsAFmDU" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/coRWtkRpNhw" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/f7nPA1oEbqg" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/OLS9yCmYfNw" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/0r2x7G0hwCw" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/V6SR4lNqjME" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/nD1f1Ian0kA" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/Mks-Y_PF_7o" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/F7SWoZNpSVw" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/2WcIK_8f7oQ" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/8AHCfZTRGiI" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/FDFqzVy2nI0" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/VYOjWnS4cMY" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/kn2f1AVB9W4" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/ft3b1-Cm-0M" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/PENk6NBEyPs" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/qkNa5xzOe5U" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/kF7DW_mZatA" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/93axfl2xlao" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/zfaOf70M4xs" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/CZRH68Ib1Ko" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/N-aK6JnyFmk" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/Vrs0XgnXsxk" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/VwBIVWX8YtQ" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/K4_Qzx-E2LQ" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/HyHNuVaZJ-k" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/LGQCPOMcYJQ" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/e4QGnppJ-ys" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/gxEPV4kolz0" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/m2uTFF_3MaA" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/TbSm6HsX_ek" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/phfjlcGlT3g" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/JM20K--96BE" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/AfkF30yPfK0" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/VcfIsVNp4js" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/u-WTfP3WJc4" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/4aeETEoNfOg" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/dKHBVf0z5co" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/yYTnHjD6GuE" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/nuncFLIR1Qw" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/RrzrOyeo5o8" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/3yk0in7QTHo" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/KF33eZXLvmU" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/_CLzzUfDjUo" allowfullscreen></iframe>
-    </div>
+<div class="video-wall" id="video-wall">
+    <!-- Video iframes will be inserted here by JavaScript -->
+</div>
+
+<script>
+    // Step 2: Array of video URLs
+    const videoUrls = [
+    "https://www.youtube.com/embed/yb6vArLA9cA",
+    "https://www.youtube.com/embed/eD81CsAFmDU",
+    "https://www.youtube.com/embed/coRWtkRpNhw",
+    "https://www.youtube.com/embed/f7nPA1oEbqg",
+    "https://www.youtube.com/embed/OLS9yCmYfNw",
+    "https://www.youtube.com/embed/0r2x7G0hwCw",
+    "https://www.youtube.com/embed/V6SR4lNqjME",
+    "https://www.youtube.com/embed/nD1f1Ian0kA",
+    "https://www.youtube.com/embed/Mks-Y_PF_7o",
+    "https://www.youtube.com/embed/F7SWoZNpSVw",
+    "https://www.youtube.com/embed/2WcIK_8f7oQ",
+    "https://www.youtube.com/embed/8AHCfZTRGiI",
+    "https://www.youtube.com/embed/FDFqzVy2nI0",
+    "https://www.youtube.com/embed/VYOjWnS4cMY",
+    "https://www.youtube.com/embed/kn2f1AVB9W4",
+    "https://www.youtube.com/embed/ft3b1-Cm-0M",
+    "https://www.youtube.com/embed/PENk6NBEyPs",
+    "https://www.youtube.com/embed/qkNa5xzOe5U",
+    "https://www.youtube.com/embed/kF7DW_mZatA",
+    "https://www.youtube.com/embed/93axfl2xlao",
+    "https://www.youtube.com/embed/zfaOf70M4xs",
+    "https://www.youtube.com/embed/CZRH68Ib1Ko",
+    "https://www.youtube.com/embed/N-aK6JnyFmk",
+    "https://www.youtube.com/embed/Vrs0XgnXsxk",
+    "https://www.youtube.com/embed/VwBIVWX8YtQ",
+    "https://www.youtube.com/embed/K4_Qzx-E2LQ",
+    "https://www.youtube.com/embed/HyHNuVaZJ-k",
+    "https://www.youtube.com/embed/LGQCPOMcYJQ",
+    "https://www.youtube.com/embed/e4QGnppJ-ys",
+    "https://www.youtube.com/embed/gxEPV4kolz0",
+    "https://www.youtube.com/embed/m2uTFF_3MaA",
+    "https://www.youtube.com/embed/TbSm6HsX_ek",
+    "https://www.youtube.com/embed/phfjlcGlT3g",
+    "https://www.youtube.com/embed/JM20K--96BE",
+    "https://www.youtube.com/embed/AfkF30yPfK0",
+    "https://www.youtube.com/embed/VcfIsVNp4js",
+    "https://www.youtube.com/embed/u-WTfP3WJc4",
+    "https://www.youtube.com/embed/4aeETEoNfOg",
+    "https://www.youtube.com/embed/dKHBVf0z5co",
+    "https://www.youtube.com/embed/yYTnHjD6GuE",
+    "https://www.youtube.com/embed/nuncFLIR1Qw",
+    "https://www.youtube.com/embed/RrzrOyeo5o8",
+    "https://www.youtube.com/embed/3yk0in7QTHo",
+    "https://www.youtube.com/embed/KF33eZXLvmU",
+    "https://www.youtube.com/embed/_CLzzUfDjUo",
+    "https://www.youtube.com/embed/nzUY6Iiur6E",
+    "https://www.youtube.com/embed/hN2jOHeI5tc",
+    "https://www.youtube.com/embed/-hT4qJBx8yw",
+    "https://www.youtube.com/embed/E28JMBKK3WQ",
+    "https://www.youtube.com/embed/EGuEZ5R21Qc",
+    "https://www.youtube.com/embed/9Cy__PpiJ_Y",
+    "https://www.youtube.com/embed/DkFJE8ZdeG8",
+    "https://www.youtube.com/embed/kes8cFqkHac",
+    "https://www.youtube.com/embed/sVZpHFXcFJw"
+];
+
+    // Step 3: Function to shuffle the array
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    // Step 4: Shuffle the video URLs
+    const shuffledVideos = shuffleArray(videoUrls);
+
+    // Step 5: Render the shuffled videos
+    const videoWall = document.getElementById("video-wall");
+    shuffledVideos.forEach(url => {
+        const iframe = document.createElement("iframe");
+        iframe.src = url;
+        iframe.allowFullscreen = true;
+        iframe.style.width = "100%";
+        iframe.style.height = "200px"; // Adjust height as needed
+        videoWall.appendChild(iframe);
+    });
+</script>
+
 </body>
 </html>
