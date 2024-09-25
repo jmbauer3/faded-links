@@ -225,3 +225,8 @@ body {
   opacity: 0;
   transition: opacity 1s ease;
 }
+
+
+.upvotes .highlighted {
+  color: #ffcc00; /* Change to your desired highlight color */
+}
