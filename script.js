@@ -88,7 +88,7 @@ function createMarkovChain() {
 function increaseEffects() {
   commentCount++;
   if (commentCount > 5) {
-    zalgoIntensity = Math.min(1, zalgoIntensity + 0.1);
+    zalgoIntensity = Math.min(1, zalgoIntensity + 0.01);
   }
   if (commentCount > 10) {
     markovEffect = true;
@@ -223,3 +223,6 @@ function changeVideo() {
     player.loadVideoById(randomVideoID);
   }, Math.random() * (15000 - 5000) + 5000); // Switch every 5-15 seconds
 }
+
+// Ensure the music starts at half volume
+document.querySelector('audio').volume = 0.5;
