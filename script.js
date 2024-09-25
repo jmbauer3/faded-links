@@ -122,6 +122,7 @@ function addComment() {
   const upvotes = document.createElement('span');
 upvotes.className = 'upvotes';
 
+
 // Create a like count element
 const likeCount = document.createElement('span');
 likeCount.className = 'likeCount'; // Class for styling if needed
@@ -149,11 +150,9 @@ thumbsUpIcon.onclick = function() {
 upvotes.appendChild(thumbsUpIcon);
 upvotes.appendChild(likeCount);
 
-commentElement.appendChild(upvotes);
+commentElement.appendChild(upvotes); // Add the upvotes section to the comment element
 
-
-
-  const commentsBubble = document.createElement('span');
+const commentsBubble = document.createElement('span');
 commentsBubble.className = 'commentsBubble';
 commentsBubble.innerHTML = `<i class="fas fa-comment"></i> ${Math.floor(Math.random() * 4)}`;
 
@@ -161,10 +160,13 @@ commentsBubble.innerHTML = `<i class="fas fa-comment"></i> ${Math.floor(Math.ran
 const commentInput = document.createElement('input');
 commentInput.type = 'text';
 commentInput.placeholder = 'In the silence, I wonder...'; // Thematic placeholder
-commentInput.className = 'commentInput'; // Add a class for styling
+commentInput.className = 'comment-input'; // Add a class for styling
 commentInput.style.display = 'none'; // Initially hidden
-commentInput.style.width = '100%'; // Fill horizontal space
+commentInput.style.width = 'calc(100% - 20px)'; // Fill horizontal space with some margin
 commentInput.style.marginTop = '5px'; // Space above the input
+commentInput.style.position = 'absolute'; // Keep the input from pushing icons
+commentInput.style.left = '10px'; // Position it properly
+commentInput.style.right = '10px'; // Give it some padding on the right
 
 // Append the input to the comment element after the commentsBubble
 commentElement.appendChild(commentsBubble);
@@ -180,6 +182,7 @@ commentsBubble.onclick = function(event) {
   
   // Show the input box
   commentInput.style.display = 'block'; // Show the input
+  commentInput.focus(); // Automatically focus on the input when it appears
 };
 
 // Handle pressing enter in the comment input
@@ -195,6 +198,7 @@ commentInput.onkeypress = function(event) {
   }
 };
 
+// Function to add user comment
 function addUserComment(comment) {
   const userCommentElement = document.createElement('div');
   userCommentElement.className = 'userComment';
@@ -207,29 +211,32 @@ function addUserComment(comment) {
   commentElement.scrollTop = commentElement.scrollHeight; // Scroll to the bottom of the feed
 }
 
+// Add the comment element to the feed
+const feed = document.getElementById('feed');
+feed.appendChild(commentElement);
 
+// Scroll to the bottom of the feed
+feed.scrollTop = feed.scrollHeight;
 
-  const feed = document.getElementById('feed');
-  feed.appendChild(commentElement);
-
-  feed.scrollTop = feed.scrollHeight;
-
+// Function to increase likes
 function increaseLikes(element) {
   const likeCountElement = element.nextElementSibling; // Get the like count span
   let currentCount = parseInt(likeCountElement.textContent); // Get current like count
   currentCount++; // Increase the count by 1
   likeCountElement.textContent = currentCount; // Update the displayed count
-  }
-
-  // Fade out older comments at a slower rate for better pacing
-  if (feed.children.length > maxComments) {
-    const oldestComment = feed.children[0];
-    oldestComment.classList.add('fadeOut');
-    setTimeout(() => {
-      oldestComment.remove();
-    }, 1500); // Slightly longer fade duration for a smoother exit
-  }
 }
+
+
+
+// Fade out older comments at a slower rate for better pacing
+if (feed.children.length > maxComments) {
+  const oldestComment = feed.children[0];
+  oldestComment.classList.add('fadeOut');
+  setTimeout(() => {
+    oldestComment.remove();
+  }, 1500); // Slightly longer fade duration for a smoother exit
+}
+
 
 // YouTube API Section
 let player;

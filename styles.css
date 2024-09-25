@@ -231,36 +231,25 @@ body {
   color: #ffcc00; /* Change to your desired highlight color */
 }
 
+.commentElement {
+  position: relative; /* Allows absolute positioning for child elements */
+}
 
 .upvotes, .commentsBubble {
-  display: flex; /* Use flexbox for alignment */
-  align-items: center; /* Center vertically */
+  display: inline-block; /* Keep icons inline */
 }
 
-.commentsBubble {
-  cursor: pointer; /* Change cursor to pointer for the comment bubble */
-}
-
-/* Style for the input box */
-.commentInput {
+.comment-input {
   display: none; /* Initially hidden */
-  width: 100%; /* Fill the entire width of the parent */
-  margin-top: 5px; /* Space above the input */
-  border: 1px solid #ccc; /* Border for the input box */
-  border-radius: 4px; /* Rounded corners */
-  padding: 10px; /* Padding for comfort */
+  width: calc(100% - 20px); /* Full width minus margin */
+  margin: 10px 0; /* Space above and below */
+  padding: 10px; /* Padding for the text box */
+  border: 1px solid #ccc; /* Border styling */
+  border-radius: 5px; /* Rounded corners */
   background-color: #f9f9f9; /* Background color */
 }
 
-/* Style for user comments */
-.userComment {
-  background-color: #e0e0e0; /* Light grey background */
-  border: 1px solid #ccc; /* Border for differentiation */
-  border-radius: 4px; /* Rounded corners */
-  padding: 10px; /* Padding inside the box */
-  margin-top: 5px; /* Space between comments */
+.comment-input:focus {
+  outline: none; /* Remove default outline */
+  border-color: #666; /* Change border color on focus */
 }
-
-
-
-
