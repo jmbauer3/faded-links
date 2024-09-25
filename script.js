@@ -171,20 +171,6 @@ document.addEventListener('click', (event) => {
       likeCountValue -= 1;
     }
 
-// Click handler for the thumbs-up icon
-thumbsUpIcon.onclick = function() {
-  if (!hasUpvoted) {
-    hasUpvoted = true;
-    const currentCount = parseInt(likeCount.textContent, 10);
-    likeCount.textContent = currentCount + 1;
-
-    // Add the 'liked' class to the like button
-    upvotes.classList.add('liked'); // Change this line to add the class to the upvote element
-    thumbsUpIcon.style.pointerEvents = 'none'; // Disable further clicks
-  }
-};
-
-
     // Update the inner HTML correctly
     upvoteElement.querySelector('span').textContent = likeCountValue; // Update the count text
   }
@@ -206,6 +192,7 @@ thumbsUpIcon.onclick = function() {
     }
   }
 });
+
 
 
 
