@@ -227,35 +227,25 @@ body {
 }
 
 
-/* Ensure you're using the same class name in both your CSS and JS */
 .comment {
-  position: relative; /* Allows for absolute positioning of child elements */
-  margin: 10px 0; /* Spacing between comments */
-}
-
-/* Styling for the highlighted state of the like button */
-.upvotes .highlighted {
-  color: #ffcc00; /* Highlight color for liked state */
-}
-
-.commentsBubble {
-  cursor: pointer; /* Change cursor to pointer on hover */
+  position: relative;
+  margin: 10px 0;
+  padding-bottom: 50px; /* Add padding to make space for the comment input */
 }
 
 /* Style for the input field */
 .comment-input {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -40px; /* Ensure it appears below the buttons */
+  position: relative; /* Ensure it stays below the buttons */
   display: none; /* Initially hidden */
-  width: calc(100% - 20px);
+  width: 100%; /* Full width */
+  margin-top: 10px; /* Space above the input */
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #f9f9f9;
 }
 
+/* Show input when the 'visible' class is added */
 .comment-input.visible {
-  display: block; /* Show when the 'visible' class is added */
+  display: block;
 }
