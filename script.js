@@ -243,15 +243,15 @@ commentInput.onkeydown = function(event) {
 // Function to add user comments under the parent comment
 function addUserComment(userComment, parentCommentElement) {
   const userCommentElement = document.createElement('div');
-  userCommentElement.className = 'user-comment';
-  
-  // Apply similar styling to the parent comment
-  userCommentElement.style.backgroundColor = '#333344'; // Match the theme
-  userCommentElement.style.padding = '10px';
-  userCommentElement.style.marginTop = '5px';
-  userCommentElement.style.borderRadius = '5px';
-  userCommentElement.style.border = '1px solid #5a5a8a'; // Match border color
-  
+  userCommentElement.className = 'child-comment'; // Use the child-comment class instead
+
+  // Remove inline styling since we will apply styles from CSS
+  // userCommentElement.style.backgroundColor = '#333344'; // Match the theme
+  // userCommentElement.style.padding = '10px';
+  // userCommentElement.style.marginTop = '5px';
+  // userCommentElement.style.borderRadius = '5px';
+  // userCommentElement.style.border = '1px solid #5a5a8a'; // Match border color
+
   const userCommentText = document.createElement('p');
   userCommentText.textContent = userComment;
 
@@ -260,6 +260,7 @@ function addUserComment(userComment, parentCommentElement) {
   // Append the user's comment under the parent comment
   parentCommentElement.appendChild(userCommentElement);
 }
+
 
 
 

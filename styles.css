@@ -276,3 +276,26 @@ body {
 .comment-input.visible {
   display: block;
 }
+
+
+.child-comment {
+  background-color: rgba(42, 42, 90, 0.8); /* Similar to the main comment but slightly darker */
+  padding: 15px;
+  margin-left: 20px; /* Indent child comments */
+  margin-bottom: 10px;
+  border-radius: 5px;
+  color: #d1d1e9;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  position: relative; /* For absolute positioning of the line */
+}
+
+.child-comment::before {
+  content: ''; /* Create a pseudo-element */
+  position: absolute; /* Position it absolutely */
+  left: -10px; /* Position to the left of the comment box */
+  top: 0; /* Align to the top */
+  bottom: 0; /* Extend to the bottom */
+  width: 4px; /* Width of the line */
+  background-color: #ffd700; /* Change this to your desired color */
+  border-radius: 2px; /* Rounded edges for a modern look */
+}
