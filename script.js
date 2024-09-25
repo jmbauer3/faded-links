@@ -1,95 +1,24 @@
-let comments = []; // Empty array to store comments from the CSV
-const maxComments = 10; // Maximum number of comments before deleting old ones
 let zalgoIntensity = 0; // Start with no Zalgo effect
-let markovEffect = false; // Start without using the Markov chain
-let commentCount = 0; // Count the number of comments added
-
-// Fetch comments from the CSV file
-fetch('comments.csv')
-  .then(response => response.text())
-  .then(data => {
-    comments = data.split('\n'); // Split CSV data by newlines
-    createMarkovChain(); // Build the Markov chain once the comments are loaded
-    startCommentFeed(); // Start showing comments once the CSV is loaded
-  })
-  .catch(error => console.error('Error loading comments:', error));
-
-// Function to start adding comments after CSV is loaded
-function startCommentFeed() {
-  setInterval(addComment, 3000); // Add a new comment every 3 seconds
-}
-
-// Zalgo text function
-function zalgo(text, intensity = 1) {
-  const zalgoChars = {
-    up: ['̍', '̎', '̄', '̅', '̿', '̑', '̆', '̐', '͒', '͗', '͑', '̇', '̈', '̊', '͂', '̓', '̈́', '͊', '͋', '͌', '̃', '̂', '̌', '͐', '̀', '́', '̋', '̏', '̽', '̾', '͛', '͆', '̚'],
-    down: ['̖', '̗', '̘', '̙', '̜', '̝', '̞', '̟', '̠', '̤', '̥', '̦', '̩', '̪', '̫', '̬', '̭', '̮', '̯', '̰', '̱', '̲', '̳', '̹', '̺', '̻', '̼', 'ͅ', '͇', '͈', '͉', '͍', '͎', '͓', '͔', '͕', '͖', '͙', '͚', '̣'],
-    mid: ['̕', '̛', '̀', '́', '͘', '̡', '̢', '̧', '̨', '̴', '̵', '̶', '͜', '͝', '͞', '͟', '͠', '͢', '̸', '̷', '͡', '҉']
-  };
-  return text.split('').map(char => {
-    if (Math.random() < intensity) {
-      let zalgified = char;
-      zalgified += zalgoChars.up[Math.floor(Math.random() * zalgoChars.up.length)];
-      zalgified += zalgoChars.down[Math.floor(Math.random() * zalgoChars.down.length)];
-      zalgified += zalgoChars.mid[Math.floor(Math.random() * zalgoChars.mid.length)];
-      return zalgified;
-    }
-    return char;
-  }).join('');
-}
-
-// Markov Chain for generating new comments
-class MarkovChain {
-  constructor(data) {
-    this.data = data;
-    this.chain = {};
-    this.buildChain();
-  }
-
-  buildChain() {
-    for (let i = 0; i < this.data.length; i++) {
-      let words = this.data[i].split(' '); // Each comment from the CSV
-      for (let j = 0; j < words.length - 1; j++) {
-        let word = words[j];
-        let nextWord = words[j + 1];
-        if (!this.chain[word]) {
-          this.chain[word] = [];
-        }
-        this.chain[word].push(nextWord);
-      }
-    }
-  }
-
-  generate(startWord, length = 20) {
-    let result = [startWord];
-    let currentWord = startWord;
-    for (let i = 0; i < length - 1; i++) {
-      let nextWords = this.chain[currentWord];
-      if (!nextWords || nextWords.length === 0) {
-        break;
-      }
-      currentWord = nextWords[Math.floor(Math.random() * nextWords.length)];
-      result.push(currentWord);
-    }
-    return result.join(' ');
-  }
-}
-
-// Create the Markov chain instance once comments are loaded
-let markov;
-function createMarkovChain() {
-  markov = new MarkovChain(comments);
-}
+let maxZalgoIntensity = 0.5; // Cap the intensity to something reasonable
+let zalgoStep = 0.01; // Small step for each comment added
 
 // Function to gradually increase the effects
 function increaseEffects() {
-  commentCount++;
-  if (commentCount > 5) {
-    zalgoIntensity = Math.min(1, zalgoIntensity + 0.1); // Gradually increase Zalgo intensity
+  if (zalgoIntensity < maxZalgoIntensity) {
+    zalgoIntensity += zalgoStep; // Gradually increase Zalgo effect
   }
-  if (commentCount > 10) {
-    markovEffect = true; // Start using Markov chain after 10 comments
-  }
+}
+
+// Zalgo function with intensity control
+function zalgo(text, intensity) {
+  const zalgoChars = ['̷', '̵', '̶', '̷', '͜', '͢', '͞', '͟', '͠', '͡'];
+  return text.split('').map((char) => {
+    if (Math.random() < intensity) {
+      // Add Zalgo characters based on intensity
+      return char + zalgoChars[Math.floor(Math.random() * zalgoChars.length)];
+    }
+    return char; // Return the normal character
+  }).join('');
 }
 
 // Function to add a comment to the feed
@@ -148,6 +77,7 @@ function addComment() {
     }, 1000); // Wait for the fade-out animation to complete
   }
 }
+
 
 // Ensure the music starts at half volume
 document.querySelector('audio').volume = 0.5;
@@ -222,10 +152,12 @@ function getRandomVideoID() {
 
 function startAtRandomTime() {
   const videoDuration = player.getDuration();
-  const maxStartTime = videoDuration - 20;
+  const bufferZone = 40; // Increase buffer zone from the end (in seconds)
+  const maxStartTime = videoDuration - bufferZone;
   const randomStartTime = Math.floor(Math.random() * maxStartTime);
   player.seekTo(randomStartTime, true);
 }
+
 
 function changeVideo() {
   setInterval(() => {
