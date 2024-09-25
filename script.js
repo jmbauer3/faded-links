@@ -129,7 +129,7 @@ upvotes.className = 'upvotes';
 // Create a like count element
 const likeCount = document.createElement('span');
 likeCount.className = 'likeCount'; // Class for styling if needed
-likeCount.textContent = '0'; // Initialize like count to 0
+likeCount.textContent = Math.floor(Math.random() * 9); // Random like count between 0 and 8
 
 // Create the thumbs-up icon
 const thumbsUpIcon = document.createElement('i');
@@ -170,6 +170,20 @@ document.addEventListener('click', (event) => {
     } else {
       likeCountValue -= 1;
     }
+
+// Click handler for the thumbs-up icon
+thumbsUpIcon.onclick = function() {
+  if (!hasUpvoted) {
+    hasUpvoted = true;
+    const currentCount = parseInt(likeCount.textContent, 10);
+    likeCount.textContent = currentCount + 1;
+
+    // Add the 'liked' class to the like button
+    upvotes.classList.add('liked'); // Change this line to add the class to the upvote element
+    thumbsUpIcon.style.pointerEvents = 'none'; // Disable further clicks
+  }
+};
+
 
     // Update the inner HTML correctly
     upvoteElement.querySelector('span').textContent = likeCountValue; // Update the count text
