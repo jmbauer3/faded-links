@@ -120,69 +120,131 @@ function addComment() {
   commentElement.appendChild(commentText);
 
   const upvotes = document.createElement('span');
-  upvotes.className = 'upvotes';
+upvotes.className = 'upvotes';
 
-  // Create a like count element
-  const likeCount = document.createElement('span');
-  likeCount.className = 'likeCount'; // Class for styling if needed
-  likeCount.textContent = Math.floor(Math.random() * 8); // Initial random like count
+// Create a like count element
+const likeCount = document.createElement('span');
+likeCount.className = 'likeCount'; // Class for styling if needed
+likeCount.textContent = Math.floor(Math.random() * 8); // Initial random like count
 
-  // Create the thumbs-up icon and make it clickable
-  const thumbsUpIcon = document.createElement('i');
-  thumbsUpIcon.className = 'fas fa-thumbs-up';
+// Create the thumbs-up icon and make it clickable
+const thumbsUpIcon = document.createElement('i');
+thumbsUpIcon.className = 'fas fa-thumbs-up';
 
-  // Append the icon and like count to the upvotes span
-  upvotes.appendChild(thumbsUpIcon);
-  upvotes.appendChild(likeCount);
+// Variable to track if the upvote has been made
+let hasUpvoted = false;
 
-  commentElement.appendChild(upvotes);
-
-  // Create a comments bubble for replies
-  const commentsBubble = document.createElement('span');
-  commentsBubble.className = 'commentsBubble comment-btn';
-  commentsBubble.innerHTML = `<i class="fas fa-comment"></i> ${Math.floor(Math.random() * 4)}`; // Icon + random number
-
-  // Create the reply box
-  const replyBox = document.createElement('div');
-  replyBox.className = 'reply-box'; // Ensure this matches the class used in event listener
-  replyBox.style.display = 'none'; // Hidden initially
-
-  const replyTextarea = document.createElement('textarea');
-  replyTextarea.placeholder = 'In the silence, I wonder...';
-  replyTextarea.rows = 3;
-
-  const replySubmit = document.createElement('button');
-  replySubmit.className = 'reply-submit';
-  replySubmit.textContent = 'Submit Reply';
-
-  // Append elements to the reply box
-  replyBox.appendChild(replyTextarea);
-  replyBox.appendChild(replySubmit);
-
-  // Append everything to the comment element
-  commentElement.appendChild(commentsBubble);
-  commentElement.appendChild(replyBox); // Append the reply box
-
-  // Add the new comment to the feed
-  const feed = document.getElementById('feed');
-  feed.appendChild(commentElement);
-  
-  // Scroll to the bottom of the feed
-  feed.scrollTop = feed.scrollHeight;
-
-  // Fade out older comments if necessary
-  if (feed.children.length > maxComments) {
-    const oldestComment = feed.children[0];
-    oldestComment.classList.add('fadeOut');
-    setTimeout(() => {
-      oldestComment.remove();
-    }, 1500); // Fade out duration
+// Click handler for the thumbs-up icon
+thumbsUpIcon.onclick = function() {
+  if (!hasUpvoted) {
+    hasUpvoted = true;
+    const currentCount = parseInt(likeCount.textContent, 10);
+    likeCount.textContent = currentCount + 1;
+    
+    // Add the 'liked' class to change color
+    thumbsUpIcon.classList.add('liked');
+    thumbsUpIcon.style.pointerEvents = 'none'; // Disable further clicks
   }
+};
+
+
+// Append the icon and like count to the upvotes span
+upvotes.appendChild(thumbsUpIcon);
+upvotes.appendChild(likeCount);
+
+commentElement.appendChild(upvotes);
+
+
+
+// Make sure to attach the comment button properly
+const commentsBubble = document.createElement('span');
+commentsBubble.className = 'commentsBubble comment-btn';
+commentsBubble.innerHTML = `<i class="fas fa-comment"></i> ${Math.floor(Math.random() * 4)}`; // Icon + random number
+
+// Create an input field for user comments
+const commentInput = document.createElement('input');
+commentInput.className = 'comment-input'; // Assign the correct class for styling
+commentInput.type = 'text';
+commentInput.placeholder = 'In the silence, I wonder...';
+commentInput.style.display = 'none'; // Hidden initially
+
+// Append the input to the comments bubble
+commentElement.appendChild(commentsBubble); // Append comment icon to the comment element
+commentElement.appendChild(commentInput); // Append the comment input box
+
+// Click event to show the input when the comments bubble is clicked
+commentsBubble.onclick = function() {
+  if (commentInput.style.display === 'none') {
+    commentInput.style.display = 'block'; // Show the input
+  } else {
+    commentInput.style.display = 'none'; // Hide the input if clicked again
+  }
+  commentInput.focus(); // Automatically focus the input
+};
+
+
+// Keydown event to handle submitting the comment on Enter
+commentInput.onkeydown = function(event) {
+  if (event.key === 'Enter') {
+    const userComment = commentInput.value.trim(); // Get user comment
+    if (userComment) {
+      addUserComment(userComment, commentElement); // Add user's comment
+      commentInput.value = ''; // Clear the input
+      commentInput.classList.remove('visible'); // Hide the input again
+    }
+  }
+};
+
+// Update the addUserComment function to place comments under their parent comment
+// Function to add user comments under the parent comment
+function addUserComment(userComment, parentCommentElement) {
+  const userCommentElement = document.createElement('div');
+  userCommentElement.className = 'user-comment';
+  
+  // Apply similar styling to the parent comment
+  userCommentElement.style.backgroundColor = '#333344'; // Match the theme
+  userCommentElement.style.padding = '10px';
+  userCommentElement.style.marginTop = '5px';
+  userCommentElement.style.borderRadius = '5px';
+  userCommentElement.style.border = '1px solid #5a5a8a'; // Match border color
+  
+  const userCommentText = document.createElement('p');
+  userCommentText.textContent = userComment;
+
+  userCommentElement.appendChild(userCommentText);
+  
+  // Append the user's comment under the parent comment
+  parentCommentElement.appendChild(userCommentElement);
 }
 
 
 
 
+
+
+  const feed = document.getElementById('feed');
+  feed.appendChild(commentElement);
+
+  feed.scrollTop = feed.scrollHeight;
+
+function increaseLikes(element) {
+  const likeCountElement = element.nextElementSibling; // Get the like count span
+  let currentCount = parseInt(likeCountElement.textContent); // Get current like count
+  currentCount++; // Increase the count by 1
+  likeCountElement.textContent = currentCount; // Update the displayed count
+  }
+
+
+
+  // Fade out older comments at a slower rate for better pacing
+  if (feed.children.length > maxComments) {
+    const oldestComment = feed.children[0];
+    oldestComment.classList.add('fadeOut');
+    setTimeout(() => {
+      oldestComment.remove();
+    }, 1500); // Slightly longer fade duration for a smoother exit
+  }
+}
 
 // YouTube API Section
 let player;
@@ -317,10 +379,10 @@ document.querySelector('audio').volume = 0.5;
 // Add event listeners for dynamically created comments
 document.addEventListener('click', (event) => {
   // Like functionality
-  if (event.target.closest('.fa-thumbs-up')) {
-    let upvoteElement = event.target.closest('.upvotes');
+  if (event.target.closest('.like-btn')) {
+    let upvoteElement = event.target.closest('.like-btn');
     let likeIcon = upvoteElement.querySelector('i');
-    let likeCountText = upvoteElement.querySelector('.likeCount').textContent.trim();
+    let likeCountText = upvoteElement.textContent.trim().split(' ')[1];
 
     // Parse the like count safely
     let likeCount = parseInt(likeCountText);
@@ -335,14 +397,13 @@ document.addEventListener('click', (event) => {
       likeCount -= 1;
     }
 
-    // Update the like count display
-    upvoteElement.querySelector('.likeCount').textContent = likeCount; // Update count directly
+    // Update the inner HTML correctly
+    upvoteElement.innerHTML = `<i class="fas fa-thumbs-up ${likeIcon.classList.contains('liked') ? 'liked' : ''}"></i> ${likeCount}`;
   }
 
   // Comment functionality (e.g., reply box toggle)
-  if (event.target.closest('.commentsBubble')) {
-    let commentElement = event.target.closest('.comment');
-    let commentBox = commentElement.querySelector('.reply-box');
+  if (event.target.closest('.comment-btn')) {
+    let commentBox = event.target.closest('.comment').querySelector('.reply-box');
     commentBox.style.display = (commentBox.style.display === 'none' || !commentBox.style.display) ? 'block' : 'none';
   }
 
@@ -352,9 +413,7 @@ document.addEventListener('click', (event) => {
     const userReply = replyBox.value.trim();
     if (userReply !== "") {
       const replyContainer = event.target.closest('.comment').querySelector('.user-reply');
-      const replyElement = document.createElement('p'); // Create a new paragraph for the reply
-      replyElement.textContent = userReply;
-      replyContainer.appendChild(replyElement); // Append to the user replies
+      replyContainer.innerHTML += `<p>${userReply}</p>`;
       replyBox.value = ""; // Clear the input field after submission
     }
   }
