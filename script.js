@@ -144,7 +144,6 @@ function addComment() {
 
 // YouTube API Section
 let player;
-let isVideoLoaded = false;
 
 function onYouTubeIframeAPIReady() {
   loadRandomVideo();
@@ -159,7 +158,7 @@ function loadRandomVideo() {
       controls: 0,
       mute: 1,
       loop: 1,
-      playlist: randomVideoID
+      playlist: randomVideoID // Ensure that the loop works with the playlist
     },
     events: {
       onReady: onPlayerReady,
@@ -170,8 +169,8 @@ function loadRandomVideo() {
 
 function onPlayerReady(event) {
   event.target.mute();
-  isVideoLoaded = true;
   startAtRandomTime(event.target);
+  changeVideo(); // Start changing videos after the player is ready
 }
 
 function onPlayerStateChange(event) {
@@ -228,30 +227,31 @@ function getRandomVideoID() {
   'RrzrOyeo5o8',
   '3yk0in7QTHo',
   'KF33eZXLvmU',
+  '_CLzzUfDjUo',
   ];
   return videoIDs[Math.floor(Math.random() * videoIDs.length)];
 }
 
 function startAtRandomTime(player) {
-  const videoDuration = player.getDuration();
-  if (videoDuration > 0) {
-    const bufferZone = 40; // seconds
-    const maxStartTime = videoDuration - bufferZone;
-    const randomStartTime = Math.floor(Math.random() * maxStartTime);
-    player.seekTo(randomStartTime, true);
-  }
+  // Delay seeking to allow video duration to be set
+  setTimeout(() => {
+    const videoDuration = player.getDuration();
+    if (videoDuration > 0) {
+      const bufferZone = 40; // seconds
+      const maxStartTime = videoDuration - bufferZone;
+      const randomStartTime = Math.floor(Math.random() * maxStartTime);
+      player.seekTo(randomStartTime, true);
+    }
+  }, 1000); // Wait for 1 second before seeking
 }
 
 function changeVideo() {
   setInterval(() => {
-    if (isVideoLoaded) {
-      loadRandomVideo();
-    }
+    const randomVideoID = getRandomVideoID();
+    player.loadVideoById(randomVideoID);
+    startAtRandomTime(player); // Seek to a random time after changing video
   }, Math.random() * (15000 - 5000) + 5000); // Switch every 5-15 seconds
 }
-
-// Start changing videos after the player is ready
-setTimeout(changeVideo, 10000); // Delay to ensure player is loaded
 
 
 // Ensure the music starts at half volume
