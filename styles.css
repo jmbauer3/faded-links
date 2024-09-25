@@ -227,29 +227,38 @@ body {
 }
 
 
+/* Ensure you're using the same class name in both your CSS and JS */
+.comment {
+  position: relative; /* Allows for absolute positioning of child elements */
+  margin: 10px 0; /* Spacing between comments */
+}
+
+/* Styling for the highlighted state of the like button */
 .upvotes .highlighted {
-  color: #ffcc00; /* Change to your desired highlight color */
+  color: #ffcc00; /* Highlight color for liked state */
 }
 
-.commentElement {
-  position: relative; /* Allows absolute positioning for child elements */
+.commentsBubble {
+  cursor: pointer; /* Change cursor to pointer on hover */
 }
 
-.upvotes, .commentsBubble {
-  display: inline-block; /* Keep icons inline */
-}
-
+/* Style for the input field */
 .comment-input {
+  position: absolute; /* Take it out of the document flow */
+  left: 0;
+  right: 0;
+  bottom: -40px; /* Adjust so it appears below the like/comment buttons */
   display: none; /* Initially hidden */
-  width: calc(100% - 20px); /* Full width minus margin */
-  margin: 10px 0; /* Space above and below */
-  padding: 10px; /* Padding for the text box */
+  width: calc(100% - 20px); /* Full width minus padding */
+  margin-top: 5px; /* Space above the input */
+  padding: 10px; /* Padding for comfort */
   border: 1px solid #ccc; /* Border styling */
   border-radius: 5px; /* Rounded corners */
-  background-color: #f9f9f9; /* Background color */
+  background-color: #f9f9f9; /* Light background */
 }
 
 .comment-input:focus {
   outline: none; /* Remove default outline */
   border-color: #666; /* Change border color on focus */
 }
+
