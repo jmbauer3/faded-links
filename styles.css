@@ -244,21 +244,18 @@ body {
 
 /* Style for the input field */
 .comment-input {
-  position: absolute; /* Take it out of the document flow */
+  position: absolute;
   left: 0;
   right: 0;
-  bottom: -40px; /* Adjust so it appears below the like/comment buttons */
+  bottom: -40px; /* Ensure it appears below the buttons */
   display: none; /* Initially hidden */
-  width: calc(100% - 20px); /* Full width minus padding */
-  margin-top: 5px; /* Space above the input */
-  padding: 10px; /* Padding for comfort */
-  border: 1px solid #ccc; /* Border styling */
-  border-radius: 5px; /* Rounded corners */
-  background-color: #f9f9f9; /* Light background */
+  width: calc(100% - 20px);
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
 }
 
-.comment-input:focus {
-  outline: none; /* Remove default outline */
-  border-color: #666; /* Change border color on focus */
+.comment-input.visible {
+  display: block; /* Show when the 'visible' class is added */
 }
-

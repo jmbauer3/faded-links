@@ -157,27 +157,18 @@ commentElement.appendChild(upvotes);
 commentsBubble.className = 'commentsBubble';
 commentsBubble.innerHTML = `<i class="fas fa-comment"></i> ${Math.floor(Math.random() * 4)}`;
 
-// Create an input field for user comments
-// Create an input field for user comments
+// Create the input field and assign class
 const commentInput = document.createElement('input');
 commentInput.type = 'text';
-commentInput.placeholder = 'In the silence, I wonder...'; // Update placeholder text
-commentInput.style.display = 'none'; // Initially hidden
-commentInput.style.width = '100%'; // Fill horizontal space
-commentInput.style.marginTop = '5px'; // Spacing above the input
-commentInput.style.border = '1px solid #ccc'; // Add a border for the rectangular box
-commentInput.style.borderRadius = '4px'; // Rounded corners
-commentInput.style.padding = '10px'; // Add padding for comfort
-commentInput.style.backgroundColor = '#f9f9f9'; // Light background for visibility
-
+commentInput.placeholder = 'In the silence, I wonder...';
+commentInput.classList.add('comment-input'); // Assign the class here
 
 // Append the input to the comments bubble
 commentsBubble.appendChild(commentInput);
-commentElement.appendChild(commentsBubble);
 
 // Click event to show the input when comments bubble is clicked
 commentsBubble.onclick = function() {
-  commentInput.style.display = 'block'; // Show the input
+  commentInput.classList.toggle('visible'); // Toggle visibility with CSS class
   commentInput.focus(); // Automatically focus the input
 };
 
@@ -186,9 +177,9 @@ commentInput.onkeydown = function(event) {
   if (event.key === 'Enter') {
     const userComment = commentInput.value.trim(); // Get user comment
     if (userComment) {
-      addUserComment(userComment, commentElement); // Call a function to add the user's comment
+      addUserComment(userComment, commentElement); // Add user's comment
       commentInput.value = ''; // Clear the input
-      commentInput.style.display = 'none'; // Hide the input again
+      commentInput.classList.remove('visible'); // Hide the input again
     }
   }
 };
@@ -228,6 +219,8 @@ function increaseLikes(element) {
   currentCount++; // Increase the count by 1
   likeCountElement.textContent = currentCount; // Update the displayed count
   }
+
+
 
   // Fade out older comments at a slower rate for better pacing
   if (feed.children.length > maxComments) {
