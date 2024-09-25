@@ -36,77 +36,95 @@
 
   <script src="https://www.youtube.com/iframe_api"></script> <!-- YouTube API script -->
 
-  <script>
-    const music = document.getElementById('background-music');
+<script>
+  const music = document.getElementById('background-music');
 
-    // Listen for the end of the music
-    music.addEventListener('ended', () => {
-      // Redirect to the new page
-      window.location.href = 'end.html';
-    });
+  // Redirect when music ends
+  music.addEventListener('ended', () => {
+    window.location.href = 'end.html';
+  });
+
+  // Optional: pause audio on title click
+  document.querySelector('#title a').addEventListener('click', (event) => { 
+    music.pause(); 
+  });
+
+  // Dynamically load comments
+  const feed = document.getElementById('feed');
+  const commentsData = [ /* Insert comments array here */ ];
+
+  // Function to create comment element
+  function createCommentElement(comment) {
+    const commentElement = document.createElement('div');
+    commentElement.classList.add('comment');
+    commentElement.innerHTML = `
+      <p>${comment}</p>
+      <div class="actions">
+        <span class="like-btn">
+          <i class="fas fa-thumbs-up"></i> <span class="like-count">0</span>
+        </span>
+        <span class="comment-btn">
+          <i class="fas fa-comment"></i> Comment
+        </span>
+      </div>
+      <div class="reply-box" style="display:none;">
+        <textarea placeholder="Write a reply..."></textarea>
+        <button class="reply-submit">Submit</button>
+      </div>
+      <div class="user-reply"></div>
+    `;
+    return commentElement;
+  }
+
+  // Load and append comments to the feed
+  commentsData.forEach(comment => {
+    const commentElement = createCommentElement(comment);
+    feed.appendChild(commentElement);
+  });
+
+  // Event delegation for likes and comment interactions
+  feed.addEventListener('click', (event) => {
+    if (event.target.closest('.like-btn')) {
+      toggleLike(event.target.closest('.like-btn'));
+    }
+    if (event.target.closest('.comment-btn')) {
+      toggleCommentBox(event.target.closest('.comment-btn'));
+    }
+    if (event.target.classList.contains('reply-submit')) {
+      submitReply(event.target);
+    }
+  });
+
+  // Toggle like functionality
+  function toggleLike(likeBtn) {
+    let likeCounter = likeBtn.querySelector('.like-count');
+    let isLiked = likeBtn.classList.toggle('liked');
+
+    if (isLiked) {
+      likeCounter.innerText = parseInt(likeCounter.innerText) + 1;
+    } else {
+      likeCounter.innerText = parseInt(likeCounter.innerText) - 1;
+    }
+  }
+
+  // Toggle comment box visibility
+  function toggleCommentBox(commentBtn) {
+    const commentBox = commentBtn.closest('.comment').querySelector('.reply-box');
+    commentBox.style.display = (commentBox.style.display === 'none' || !commentBox.style.display) ? 'block' : 'none';
+  }
+
+  // Submit reply functionality
+  function submitReply(button) {
+    const replyBox = button.previousElementSibling;
+    const userReply = replyBox.value.trim();
     
-    // Optional: prevent the default action for the link if you want the audio to stop
-    document.querySelector('#title a').addEventListener('click', (event) => { music.pause(); });
-
-    // Function to toggle like
-    function toggleLike(likeBtn) {
-      let likeCounter = likeBtn.querySelector('.like-count');
-      let isLiked = likeBtn.classList.toggle('liked');
-      
-      if (isLiked) {
-        likeCounter.innerText = parseInt(likeCounter.innerText) + 1;
-      } else {
-        likeCounter.innerText = parseInt(likeCounter.innerText) - 1;
-      }
+    if (userReply !== "") {
+      const replyContainer = button.closest('.comment').querySelector('.user-reply');
+      replyContainer.innerHTML += `<p>${userReply}</p>`;
+      replyBox.value = ""; // Clear the input field after submission
     }
-
-    // Function to add comment
-    function addComment(commentBtn) {
-      const commentBox = commentBtn.closest('.comment').querySelector('.reply-box');
-      if (commentBox.style.display === 'none') {
-        commentBox.style.display = 'block';
-      } else {
-        commentBox.style.display = 'none';
-      }
-    }
-
-    // Load comments dynamically
-    const feed = document.getElementById('feed');
-    const commentsData = [ /* Insert comments array here */ ];
-
-    commentsData.forEach(comment => {
-      const commentElement = document.createElement('div');
-      commentElement.classList.add('comment');
-      commentElement.innerHTML = `
-        <p>${comment}</p>
-        <div class="actions">
-          <span class="like-btn" onclick="toggleLike(this)">
-            <i class="fas fa-thumbs-up"></i> <span class="like-count">0</span>
-          </span>
-          <span class="comment-btn" onclick="addComment(this)">
-            <i class="fas fa-comment"></i> Comment
-          </span>
-        </div>
-        <div class="reply-box" style="display:none;">
-          <textarea placeholder="Write a reply..."></textarea>
-          <button class="reply-submit" onclick="submitReply(this)">Submit</button>
-        </div>
-        <div class="user-reply"></div>
-      `;
-      feed.appendChild(commentElement);
-    });
-
-    // Submit a reply
-    function submitReply(button) {
-      const replyBox = button.previousElementSibling;
-      const userReply = replyBox.value;
-      if (userReply.trim() !== "") {
-        const replyContainer = button.closest('.comment').querySelector('.user-reply');
-        replyContainer.innerHTML = `<p>${userReply}</p>`;
-        replyBox.value = ""; // Clear the input
-      }
-    }
-  </script>
+  }
+</script>
 
   <script src="script.js"></script> <!-- Your JS code -->
 </body>
