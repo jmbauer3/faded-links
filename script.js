@@ -160,35 +160,42 @@ commentsBubble.innerHTML = `<i class="fas fa-comment"></i> ${Math.floor(Math.ran
 // Create an input field for user comments
 const commentInput = document.createElement('input');
 commentInput.type = 'text';
-commentInput.placeholder = 'Type your comment...';
+commentInput.placeholder = 'In the silence, I wonder...'; // Thematic placeholder
 commentInput.className = 'commentInput'; // Add a class for styling
 commentInput.style.display = 'none'; // Initially hidden
-commentInput.style.width = '100%'; // Make the input take the full width
+commentInput.style.width = '100%'; // Fill horizontal space
+commentInput.style.marginTop = '5px'; // Space above the input
 
-// Append the input to the comments bubble
-commentsBubble.appendChild(commentInput);
+// Append the input to the comment element after the commentsBubble
 commentElement.appendChild(commentsBubble);
+commentElement.appendChild(commentInput);
 
 // Click event to show the input when comments bubble is clicked
-commentsBubble.onclick = function() {
+commentsBubble.onclick = function(event) {
+  // Prevent the click event from bubbling up to parent elements
+  event.stopPropagation();
+  
+  // Change the color of the comment icon
+  commentsBubble.style.color = '#007BFF'; // Change to your desired color
+  
+  // Show the input box
   commentInput.style.display = 'block'; // Show the input
-  commentInput.focus(); // Automatically focus the input
 };
 
-// Keydown event to handle submitting the comment on Enter
-commentInput.onkeydown = function(event) {
+// Handle pressing enter in the comment input
+commentInput.onkeypress = function(event) {
   if (event.key === 'Enter') {
     const userComment = commentInput.value.trim(); // Get user comment
     if (userComment) {
-      addUserComment(userComment, commentElement); // Call a function to add the user's comment
+      addUserComment(userComment); // Call a function to add the user's comment
       commentInput.value = ''; // Clear the input
       commentInput.style.display = 'none'; // Hide the input again
+      commentsBubble.style.color = ''; // Reset the comment icon color
     }
   }
 };
 
-// Update the addUserComment function to place comments under their parent comment
-function addUserComment(comment, parentCommentElement) {
+function addUserComment(comment) {
   const userCommentElement = document.createElement('div');
   userCommentElement.className = 'userComment';
 
@@ -196,14 +203,9 @@ function addUserComment(comment, parentCommentElement) {
   userCommentText.textContent = comment;
   userCommentElement.appendChild(userCommentText);
 
-  // Append the user comment under its parent comment
-  parentCommentElement.appendChild(userCommentElement);
-
-  // Scroll to the bottom of the feed (if needed)
-  const feed = document.getElementById('feed');
-  feed.scrollTop = feed.scrollHeight; // Scroll to the bottom of the feed
+  commentElement.appendChild(userCommentElement); // Append below the parent comment
+  commentElement.scrollTop = commentElement.scrollHeight; // Scroll to the bottom of the feed
 }
-
 
 
 
