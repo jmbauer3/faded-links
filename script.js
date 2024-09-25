@@ -268,12 +268,14 @@ function increaseLikes(element) {
 
   // Fade out older comments at a slower rate for better pacing
   if (feed.children.length > maxComments) {
-    const oldestComment = feed.children[0];
-    oldestComment.classList.add('fadeOut');
-    setTimeout(() => {
-      oldestComment.remove();
-    }, 1500); // Slightly longer fade duration for a smoother exit
-  }
+  const oldestComment = feed.children[0];
+  oldestComment.classList.add('fadeOut');
+  
+  setTimeout(() => {
+    requestAnimationFrame(() => {
+      oldestComment.remove(); // Ensure removal happens in sync with browser's repaint
+    });
+  }, 1100); // Adjust to match transition timing
 }
 
 // YouTube API Section
