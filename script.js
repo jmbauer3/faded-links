@@ -138,23 +138,14 @@ thumbsUpIcon.className = 'fas fa-thumbs-up';
 // Create a like button element to wrap the icon and count
 const likeBtn = document.createElement('span');
 likeBtn.className = 'like-btn'; // Ensure it has the class for event handling
-
-// Create the thumbs-up icon
-const thumbsUpIcon = document.createElement('i');
-thumbsUpIcon.className = 'fas fa-thumbs-up'; // Ensure it uses Font Awesome or the correct icon library
-
-// Create a like count element
-const likeCount = document.createElement('span');
-likeCount.className = 'likeCount'; // Class for styling if needed
-likeCount.textContent = Math.floor(Math.random() * 9); // Random like count between 0 and 8
-
-// Append the icon and count to the like button
 likeBtn.appendChild(thumbsUpIcon);
 likeBtn.appendChild(likeCount);
 
 // Append the like button to the upvotes span
 upvotes.appendChild(likeBtn);
 
+// Now append the upvotes span to your comment element
+commentElement.appendChild(upvotes);
 
 
 
@@ -162,12 +153,12 @@ upvotes.appendChild(likeBtn);
 document.addEventListener('click', (event) => {
   // Like functionality
   if (event.target.closest('.like-btn')) {
-    const likeBtnElement = event.target.closest('.like-btn'); // Changed variable name for clarity
-    const likeIcon = likeBtnElement.querySelector('i'); // Select the thumbs-up icon
-    const likeCountElement = likeBtnElement.querySelector('.likeCount'); // Select the like count element
+    const upvoteElement = event.target.closest('.like-btn');
+    const likeIcon = upvoteElement.querySelector('i'); // Select the thumbs-up icon
+    let likeCountText = upvoteElement.querySelector('span').textContent;
 
     // Parse the like count safely
-    let likeCountValue = parseInt(likeCountElement.textContent);
+    let likeCountValue = parseInt(likeCountText);
     if (isNaN(likeCountValue)) {
       likeCountValue = 0; // Default to 0 if parsing fails
     }
@@ -180,12 +171,6 @@ document.addEventListener('click', (event) => {
       likeIcon.classList.add('liked'); // Add the class if not liked
       likeCountValue += 1; // Increase the like count
     }
-
-    // Update the like count text
-    likeCountElement.textContent = likeCountValue; // Update the count text
-  }
-
-  // Other event listeners...
 
     // Update the inner HTML correctly
     upvoteElement.querySelector('span').textContent = likeCountValue; // Update the count text
