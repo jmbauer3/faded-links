@@ -4,7 +4,8 @@ const maxComments = 10;
 let zalgoIntensity = 0; // Start with no Zalgo effect
 let markovEffect = false;
 let commentCount = 0;
-let zalgoIncreaseRate = 0.01; // Gradual increase rate
+let zalgoIncreaseRate = 0.005; // Gradual increase rate
+let markovStartAfter = 15;
 
 // Fetch comments from the CSV file
 fetch('comments.csv')
@@ -87,10 +88,10 @@ function createMarkovChain() {
 // Function to gradually increase effects
 function increaseEffects() {
   commentCount++;
-  if (commentCount > 5) {
-    zalgoIntensity = Math.min(1, zalgoIntensity + 0.01);
+  if (commentCount > 10) { // Start Zalgo effect after 10 comments
+    zalgoIntensity = Math.min(0.5, zalgoIntensity + zalgoIncreaseRate); // Cap at 0.5 for subtlety
   }
-  if (commentCount > 10) {
+  if (commentCount > markovStartAfter) { // Start Markov after more comments
     markovEffect = true;
   }
 }
@@ -103,7 +104,7 @@ function addComment() {
   if (markovEffect) {
     const randomIndex = Math.floor(Math.random() * comments.length);
     const randomStartWord = comments[randomIndex].split(' ')[0];
-    newComment = markov.generate(randomStartWord, 20);
+    newComment = markov.generate(randomStartWord, 15); // Slightly shorter for visual pacing
   } else {
     const randomIndex = Math.floor(Math.random() * comments.length);
     newComment = comments[randomIndex].trim();
@@ -133,12 +134,13 @@ function addComment() {
 
   feed.scrollTop = feed.scrollHeight;
 
+  // Fade out older comments at a slower rate for better pacing
   if (feed.children.length > maxComments) {
     const oldestComment = feed.children[0];
     oldestComment.classList.add('fadeOut');
     setTimeout(() => {
       oldestComment.remove();
-    }, 1000);
+    }, 1500); // Slightly longer fade duration for a smoother exit
   }
 }
 

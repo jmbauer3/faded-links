@@ -145,3 +145,83 @@ body {
     transform: translate(-50%, -50%) scale(3); /* Zoom in */
   }
 }
+
+
+/* Highlighted thumbs-up (like) button */
+.liked .fa-thumbs-up {
+  color: #ffd700; /* Gold color for the liked state */
+  transition: color 0.3s ease; /* Smooth transition */
+}
+
+/* Reply (comment input) box */
+.reply-box {
+  display: none; /* Hidden initially */
+  margin-top: 10px;
+}
+
+.reply-box textarea {
+  width: 100%;
+  padding: 10px;
+  background-color: #2c2c54; /* Match the background theme */
+  border: 1px solid #5a5a8a; /* Border color to match your theme */
+  color: #e4e6eb; /* Light text color */
+  border-radius: 5px;
+  font-size: 0.9em;
+  resize: none; /* Disable resizing */
+  outline: none; /* Remove outline on focus */
+}
+
+.reply-box textarea:focus {
+  border-color: #ffd700; /* Highlight border when typing */
+}
+
+.reply-submit {
+  background-color: #3b3b72; /* Button background */
+  border: none;
+  color: #e4e6eb; /* Light text */
+  padding: 5px 10px;
+  margin-top: 5px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 0.85em;
+  transition: background-color 0.3s ease;
+}
+
+.reply-submit:hover {
+  background-color: #ffd700; /* Highlight on hover */
+}
+
+/* Style for the submitted reply */
+.user-reply {
+  margin-top: 10px;
+  font-style: italic; /* Italic to distinguish replies */
+  color: #b3b3d4; /* Slightly lighter text */
+}
+
+/* Style for the thumbs-up and comment icons */
+.actions {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.like-btn, .comment-btn {
+  cursor: pointer;
+  display: inline-block;
+  margin-right: 15px;
+  color: #b3b3d4; /* Default color */
+  transition: color 0.3s ease; /* Smooth transition */
+}
+
+.like-btn:hover, .comment-btn:hover {
+  color: #ffd700; /* Gold on hover */
+}
+
+.like-btn i, .comment-btn i {
+  margin-right: 5px;
+}
+
+.comment.fadeOut {
+  opacity: 0;
+  transition: opacity 1s ease;
+}

@@ -46,8 +46,66 @@
     });
     
     // Optional: prevent the default action for the link if you want the audio to stop
-    // You can uncomment the line below if you want the audio to stop when clicking the link.
     document.querySelector('#title a').addEventListener('click', (event) => { music.pause(); });
+
+    // Function to toggle like
+    function toggleLike(likeBtn) {
+      let likeCounter = likeBtn.querySelector('.like-count');
+      let isLiked = likeBtn.classList.toggle('liked');
+      
+      if (isLiked) {
+        likeCounter.innerText = parseInt(likeCounter.innerText) + 1;
+      } else {
+        likeCounter.innerText = parseInt(likeCounter.innerText) - 1;
+      }
+    }
+
+    // Function to add comment
+    function addComment(commentBtn) {
+      const commentBox = commentBtn.closest('.comment').querySelector('.reply-box');
+      if (commentBox.style.display === 'none') {
+        commentBox.style.display = 'block';
+      } else {
+        commentBox.style.display = 'none';
+      }
+    }
+
+    // Load comments dynamically
+    const feed = document.getElementById('feed');
+    const commentsData = [ /* Insert comments array here */ ];
+
+    commentsData.forEach(comment => {
+      const commentElement = document.createElement('div');
+      commentElement.classList.add('comment');
+      commentElement.innerHTML = `
+        <p>${comment}</p>
+        <div class="actions">
+          <span class="like-btn" onclick="toggleLike(this)">
+            <i class="fas fa-thumbs-up"></i> <span class="like-count">0</span>
+          </span>
+          <span class="comment-btn" onclick="addComment(this)">
+            <i class="fas fa-comment"></i> Comment
+          </span>
+        </div>
+        <div class="reply-box" style="display:none;">
+          <textarea placeholder="Write a reply..."></textarea>
+          <button class="reply-submit" onclick="submitReply(this)">Submit</button>
+        </div>
+        <div class="user-reply"></div>
+      `;
+      feed.appendChild(commentElement);
+    });
+
+    // Submit a reply
+    function submitReply(button) {
+      const replyBox = button.previousElementSibling;
+      const userReply = replyBox.value;
+      if (userReply.trim() !== "") {
+        const replyContainer = button.closest('.comment').querySelector('.user-reply');
+        replyContainer.innerHTML = `<p>${userReply}</p>`;
+        replyBox.value = ""; // Clear the input
+      }
+    }
   </script>
 
   <script src="script.js"></script> <!-- Your JS code -->
