@@ -196,7 +196,7 @@ function getRandomVideoID() {
   '8AHCfZTRGiI',
   'FDFqzVy2nI0',
   'VYOjWnS4cMY',
-  'kn2f1AVB9W4',
+  'vmsA4Usj8H4',
   'ft3b1-Cm-0M',
   'PENk6NBEyPs',
   'qkNa5xzOe5U',
@@ -237,6 +237,8 @@ function getRandomVideoID() {
   'DkFJE8ZdeG8',
   'kes8cFqkHac',
   'sVZpHFXcFJw',
+  'K0eDlFX9GMc',
+  'bFUi7inkAbs',
   ];
   return videoIDs[Math.floor(Math.random() * videoIDs.length)];
 }
