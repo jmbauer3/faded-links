@@ -213,9 +213,16 @@ body {
   transition: color 0.3s ease; /* Smooth transition */
 }
 
+/* Hover effect for both buttons */
 .like-btn:hover, .comment-btn:hover {
-  color: #ffd700; /* Gold on hover */
+  color: #ffd700; /* Same hover effect for both buttons */
 }
+
+/* Like button clicked state */
+.like-btn.liked {
+  color: #ffd700; /* Change color when liked */
+}
+
 
 .like-btn i, .comment-btn i {
   margin-right: 5px;
@@ -247,16 +254,16 @@ body {
 
 .comment-input {
   display: none;
-  width: 95%; /* Slightly smaller to fit within the parent comment */
+  width: calc(100% - 20px); /* Adjust width to fit within parent */
   margin-top: 10px;
-  padding: 8px; /* Adjust padding for better fit */
+  padding: 8px;
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #f9f9f9;
   box-sizing: border-box; /* Ensure padding is included in width calculation */
 }
 
-
+/* When visible */
 .comment-input.visible {
-  display: block; /* Show input when visible class is added */
+  display: block;
 }

@@ -184,13 +184,14 @@ commentsBubble.onclick = function() {
 
 
 // Keydown event to handle submitting the comment on Enter
+// Keydown event to handle submitting the comment on Enter
 commentInput.onkeydown = function(event) {
   if (event.key === 'Enter') {
     const userComment = commentInput.value.trim(); // Get user comment
     if (userComment) {
-      addUserComment(userComment, commentElement); // Add user's comment
+      addUserComment(userComment, commentElement); // Call a function to add the user's comment
       commentInput.value = ''; // Clear the input
-      commentInput.classList.remove('visible'); // Hide the input again
+      commentInput.style.display = 'none'; // Hide the input after submission
     }
   }
 };
