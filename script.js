@@ -1,28 +1,27 @@
-let comments = []; // Empty array to store comments from the CSV
-const maxComments = 10; // Maximum number of comments before deleting old ones
+// Variables
+let comments = [];
+const maxComments = 10;
 let zalgoIntensity = 0; // Start with no Zalgo effect
-let markovEffect = false; // Start without using the Markov chain
-let commentCount = 0; // Count the number of comments added
+let markovEffect = false;
+let commentCount = 0;
+let zalgoIncreaseRate = 0.01; // Gradual increase rate
 
 // Fetch comments from the CSV file
 fetch('comments.csv')
   .then(response => response.text())
   .then(data => {
-    comments = data.split('\n'); // Split CSV data by newlines
-    createMarkovChain(); // Build the Markov chain once the comments are loaded
-    startCommentFeed(); // Start showing comments once the CSV is loaded
+    comments = data.split('\n');
+    createMarkovChain(); // Create Markov chain after comments are loaded
+    startCommentFeed(); // Start the feed once CSV is loaded
   })
   .catch(error => console.error('Error loading comments:', error));
 
-// Function to start adding comments after CSV is loaded
+// Function to start adding comments to the feed
 function startCommentFeed() {
-  setInterval(addComment, 3000); // Add a new comment every 3 seconds
+  setInterval(addComment, 3000); // Add a comment every 3 seconds
 }
 
 // Zalgo text function
-let zalgoIntensity = 0.05; // Start with a very low intensity (5%)
-let zalgoIncreaseRate = 0.01; // Increase intensity gradually over time
-
 function zalgo(text, intensity = 1) {
   const zalgoChars = {
     up: ['̍', '̎', '̄', '̅', '̿', '̑', '̆', '̐', '͒', '͗', '͑', '̇', '̈', '̊', '͂', '̓', '̈́', '͊', '͋', '͌', '̃', '̂', '̌', '͐', '̀', '́', '̋', '̏', '̽', '̾', '͛', '͆', '̚'],
@@ -52,7 +51,7 @@ class MarkovChain {
 
   buildChain() {
     for (let i = 0; i < this.data.length; i++) {
-      let words = this.data[i].split(' '); // Each comment from the CSV
+      let words = this.data[i].split(' ');
       for (let j = 0; j < words.length - 1; j++) {
         let word = words[j];
         let nextWord = words[j + 1];
@@ -79,93 +78,71 @@ class MarkovChain {
   }
 }
 
-// Create the Markov chain instance once comments are loaded
+// Create the Markov chain instance
 let markov;
 function createMarkovChain() {
   markov = new MarkovChain(comments);
 }
 
-// Function to gradually increase the effects
+// Function to gradually increase effects
 function increaseEffects() {
   commentCount++;
   if (commentCount > 5) {
-    zalgoIntensity = Math.min(1, zalgoIntensity + 0.1); // Gradually increase Zalgo intensity
+    zalgoIntensity = Math.min(1, zalgoIntensity + 0.1);
   }
   if (commentCount > 10) {
-    markovEffect = true; // Start using Markov chain after 10 comments
+    markovEffect = true;
   }
 }
 
 // Function to add a comment to the feed
 function addComment() {
-  increaseEffects(); // Gradually apply effects
-
-  // Gradually increase Zalgo intensity
-  zalgoIntensity = Math.min(zalgoIntensity + zalgoIncreaseRate, 1); // Cap intensity at 1
-
+  increaseEffects();
 
   let newComment;
   if (markovEffect) {
-    // Use Markov chain to generate new comment
     const randomIndex = Math.floor(Math.random() * comments.length);
-    const randomStartWord = comments[randomIndex].split(' ')[0]; // Pick first word of a random comment
-    newComment = markov.generate(randomStartWord, 20); // Generate new comment
+    const randomStartWord = comments[randomIndex].split(' ')[0];
+    newComment = markov.generate(randomStartWord, 20);
   } else {
-    // Select a random comment from the CSV
     const randomIndex = Math.floor(Math.random() * comments.length);
-    newComment = comments[randomIndex].trim(); // Trim to remove extra spaces
+    newComment = comments[randomIndex].trim();
   }
 
-  // Apply Zalgo effect if applicable
-  let zalgifiedComment = zalgoIntensity > 0 ? zalgo(newComment, zalgoIntensity) : newComment;
-
-// Existing code to create comments
-  let newComment = markov.generate(randomStartWord, 20);
-  let zalgifiedComment = zalgo(newComment, zalgoIntensity); // Zalgo with gradually increasing intensity
-  
+  let zalgifiedComment = zalgo(newComment, zalgoIntensity);
 
   const commentElement = document.createElement('div');
   commentElement.className = 'comment';
 
-  // Add comment text
   const commentText = document.createElement('p');
   commentText.textContent = zalgifiedComment;
   commentElement.appendChild(commentText);
 
-  // Add upvotes with thumbs up icon
   const upvotes = document.createElement('span');
   upvotes.className = 'upvotes';
-  upvotes.innerHTML = `<i class="fas fa-thumbs-up"></i> ${Math.floor(Math.random() * 8)}`; // 0-7 upvotes
+  upvotes.innerHTML = `<i class="fas fa-thumbs-up"></i> ${Math.floor(Math.random() * 8)}`;
   commentElement.appendChild(upvotes);
 
-  // Add random comments count with speech bubble icon
   const commentsBubble = document.createElement('span');
   commentsBubble.className = 'commentsBubble';
-  commentsBubble.innerHTML = `<i class="fas fa-comment"></i> ${Math.floor(Math.random() * 4)}`; // 0-3 comments
+  commentsBubble.innerHTML = `<i class="fas fa-comment"></i> ${Math.floor(Math.random() * 4)}`;
   commentElement.appendChild(commentsBubble);
 
-  // Add the comment to the feed
   const feed = document.getElementById('feed');
   feed.appendChild(commentElement);
 
-  // Scroll to the bottom of the feed
   feed.scrollTop = feed.scrollHeight;
 
-  // Check if there are too many comments
   if (feed.children.length > maxComments) {
-    // Fade out the oldest comment before removing it
     const oldestComment = feed.children[0];
     oldestComment.classList.add('fadeOut');
     setTimeout(() => {
       oldestComment.remove();
-    }, 1000); // Wait for the fade-out animation to complete
+    }, 1000);
   }
 }
 
-// Ensure the music starts at half volume
-document.querySelector('audio').volume = 0.5;
-
-// YouTube API part
+// YouTube API Section
 let player;
 function onYouTubeIframeAPIReady() {
   player = new YT.Player('player', {
@@ -190,8 +167,7 @@ function onPlayerReady(event) {
 }
 
 function getRandomVideoID() {
-  const videoIDs = 
-  [
+  const videoIDs = [
   'yb6vArLA9cA',
   'eD81CsAFmDU',
   'coRWtkRpNhw',
@@ -235,19 +211,15 @@ function getRandomVideoID() {
 
 function startAtRandomTime() {
   const videoDuration = player.getDuration();
-  const bufferZone = 40; // Increase buffer zone from the end (in seconds)
+  const bufferZone = 40;
   const maxStartTime = videoDuration - bufferZone;
   const randomStartTime = Math.floor(Math.random() * maxStartTime);
   player.seekTo(randomStartTime, true);
 }
 
-
 function changeVideo() {
   setInterval(() => {
     const randomVideoID = getRandomVideoID();
-    const videoDuration = player.getDuration();
-    const maxStartTime = videoDuration - 20;
-    const randomStartTime = Math.floor(Math.random() * maxStartTime);
-    player.loadVideoById({ videoId: randomVideoID, startSeconds: randomStartTime });
-  }, Math.random() * (15000 - 5000) + 5000);
+    player.loadVideoById(randomVideoID);
+  }, Math.random() * (15000 - 5000) + 5000); // Switch every 5-15 seconds
 }
