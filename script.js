@@ -119,9 +119,7 @@ function addComment() {
   commentText.textContent = zalgifiedComment;
   commentElement.appendChild(commentText);
 
-  
-
-  cconst upvotes = document.createElement('span');
+  const upvotes = document.createElement('span');
 upvotes.className = 'upvotes';
 
 // Create a like count element
