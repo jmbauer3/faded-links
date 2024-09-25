@@ -136,14 +136,17 @@ let hasUpvoted = false;
 
 // Click handler for the thumbs-up icon
 thumbsUpIcon.onclick = function() {
-  if (!hasUpvoted) { // Check if the user has already upvoted
-    hasUpvoted = true; // Set to true to prevent further upvoting
+  if (!hasUpvoted) {
+    hasUpvoted = true;
     const currentCount = parseInt(likeCount.textContent, 10);
-    likeCount.textContent = currentCount + 1; // Increment like count
-    thumbsUpIcon.classList.add('highlighted'); // Add highlighted class to icon
-    thumbsUpIcon.style.pointerEvents = 'none'; // Disable further clicks on the icon
+    likeCount.textContent = currentCount + 1;
+    
+    // Add the 'liked' class to change color
+    thumbsUpIcon.classList.add('liked');
+    thumbsUpIcon.style.pointerEvents = 'none'; // Disable further clicks
   }
 };
+
 
 // Append the icon and like count to the upvotes span
 upvotes.appendChild(thumbsUpIcon);
@@ -193,24 +196,27 @@ commentInput.onkeydown = function(event) {
 };
 
 // Update the addUserComment function to place comments under their parent comment
-function addUserComment(comment) {
-  const feed = document.getElementById('feed');
-
+// Function to add user comments under the parent comment
+function addUserComment(userComment, parentCommentElement) {
   const userCommentElement = document.createElement('div');
-  userCommentElement.className = 'userComment';
-  userCommentElement.style.backgroundColor = '#e0e0e0'; // Light grey background
-  userCommentElement.style.border = '1px solid #ccc'; // Border for differentiation
-  userCommentElement.style.borderRadius = '4px'; // Rounded corners
-  userCommentElement.style.padding = '10px'; // Padding inside the box
-  userCommentElement.style.marginTop = '5px'; // Space between comments
-
+  userCommentElement.className = 'user-comment';
+  
+  // Apply similar styling to the parent comment
+  userCommentElement.style.backgroundColor = '#333344'; // Match the theme
+  userCommentElement.style.padding = '10px';
+  userCommentElement.style.marginTop = '5px';
+  userCommentElement.style.borderRadius = '5px';
+  userCommentElement.style.border = '1px solid #5a5a8a'; // Match border color
+  
   const userCommentText = document.createElement('p');
-  userCommentText.textContent = comment;
-  userCommentElement.appendChild(userCommentText);
+  userCommentText.textContent = userComment;
 
-  feed.appendChild(userCommentElement);
-  feed.scrollTop = feed.scrollHeight; // Scroll to the bottom of the feed
+  userCommentElement.appendChild(userCommentText);
+  
+  // Append the user's comment under the parent comment
+  parentCommentElement.appendChild(userCommentElement);
 }
+
 
 
 
