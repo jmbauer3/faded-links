@@ -22,7 +22,7 @@
   <div id="header">
     <h1 id="title">Faded Links</h1>
     <div class="music-player">
-      <audio controls autoplay loop volume="0.5">
+      <audio id="background-music" controls autoplay loop volume="0.5">
         <source src="assets/drunk-in-carthage.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
       </audio>
@@ -34,6 +34,19 @@
   </div>
 
   <script src="https://www.youtube.com/iframe_api"></script> <!-- YouTube API script -->
+
+
+  <script>
+    const music = document.getElementById('background-music');
+
+    // Listen for the end of the music
+    music.addEventListener('ended', () => {
+      // Redirect to the new page
+      window.location.href = 'end.html';
+    });
+  </script>
+  
+
   <script src="script.js"></script> <!-- Your JS code -->
 </body>
 </html>
