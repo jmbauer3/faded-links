@@ -122,7 +122,6 @@ function addComment() {
   const upvotes = document.createElement('span');
 upvotes.className = 'upvotes';
 
-
 // Create a like count element
 const likeCount = document.createElement('span');
 likeCount.className = 'likeCount'; // Class for styling if needed
@@ -150,93 +149,95 @@ thumbsUpIcon.onclick = function() {
 upvotes.appendChild(thumbsUpIcon);
 upvotes.appendChild(likeCount);
 
-commentElement.appendChild(upvotes); // Add the upvotes section to the comment element
+commentElement.appendChild(upvotes);
 
-const commentsBubble = document.createElement('span');
+
+
+  const commentsBubble = document.createElement('span');
 commentsBubble.className = 'commentsBubble';
 commentsBubble.innerHTML = `<i class="fas fa-comment"></i> ${Math.floor(Math.random() * 4)}`;
 
 // Create an input field for user comments
+// Create an input field for user comments
 const commentInput = document.createElement('input');
 commentInput.type = 'text';
-commentInput.placeholder = 'In the silence, I wonder...'; // Thematic placeholder
-commentInput.className = 'comment-input'; // Add a class for styling
+commentInput.placeholder = 'In the silence, I wonder...'; // Update placeholder text
 commentInput.style.display = 'none'; // Initially hidden
-commentInput.style.width = 'calc(100% - 20px)'; // Fill horizontal space with some margin
-commentInput.style.marginTop = '5px'; // Space above the input
-commentInput.style.position = 'absolute'; // Keep the input from pushing icons
-commentInput.style.left = '10px'; // Position it properly
-commentInput.style.right = '10px'; // Give it some padding on the right
+commentInput.style.width = '100%'; // Fill horizontal space
+commentInput.style.marginTop = '5px'; // Spacing above the input
+commentInput.style.border = '1px solid #ccc'; // Add a border for the rectangular box
+commentInput.style.borderRadius = '4px'; // Rounded corners
+commentInput.style.padding = '10px'; // Add padding for comfort
+commentInput.style.backgroundColor = '#f9f9f9'; // Light background for visibility
 
-// Append the input to the comment element after the commentsBubble
+
+// Append the input to the comments bubble
+commentsBubble.appendChild(commentInput);
 commentElement.appendChild(commentsBubble);
-commentElement.appendChild(commentInput);
 
 // Click event to show the input when comments bubble is clicked
-commentsBubble.onclick = function(event) {
-  // Prevent the click event from bubbling up to parent elements
-  event.stopPropagation();
-  
-  // Change the color of the comment icon
-  commentsBubble.style.color = '#007BFF'; // Change to your desired color
-  
-  // Show the input box
+commentsBubble.onclick = function() {
   commentInput.style.display = 'block'; // Show the input
-  commentInput.focus(); // Automatically focus on the input when it appears
+  commentInput.focus(); // Automatically focus the input
 };
 
-// Handle pressing enter in the comment input
-commentInput.onkeypress = function(event) {
+// Keydown event to handle submitting the comment on Enter
+commentInput.onkeydown = function(event) {
   if (event.key === 'Enter') {
     const userComment = commentInput.value.trim(); // Get user comment
     if (userComment) {
-      addUserComment(userComment); // Call a function to add the user's comment
+      addUserComment(userComment, commentElement); // Call a function to add the user's comment
       commentInput.value = ''; // Clear the input
       commentInput.style.display = 'none'; // Hide the input again
-      commentsBubble.style.color = ''; // Reset the comment icon color
     }
   }
 };
 
-// Function to add user comment
+// Update the addUserComment function to place comments under their parent comment
 function addUserComment(comment) {
+  const feed = document.getElementById('feed');
+
   const userCommentElement = document.createElement('div');
   userCommentElement.className = 'userComment';
+  userCommentElement.style.backgroundColor = '#e0e0e0'; // Light grey background
+  userCommentElement.style.border = '1px solid #ccc'; // Border for differentiation
+  userCommentElement.style.borderRadius = '4px'; // Rounded corners
+  userCommentElement.style.padding = '10px'; // Padding inside the box
+  userCommentElement.style.marginTop = '5px'; // Space between comments
 
   const userCommentText = document.createElement('p');
   userCommentText.textContent = comment;
   userCommentElement.appendChild(userCommentText);
 
-  commentElement.appendChild(userCommentElement); // Append below the parent comment
-  commentElement.scrollTop = commentElement.scrollHeight; // Scroll to the bottom of the feed
+  feed.appendChild(userCommentElement);
+  feed.scrollTop = feed.scrollHeight; // Scroll to the bottom of the feed
 }
 
-// Add the comment element to the feed
-const feed = document.getElementById('feed');
-feed.appendChild(commentElement);
 
-// Scroll to the bottom of the feed
-feed.scrollTop = feed.scrollHeight;
 
-// Function to increase likes
+
+
+  const feed = document.getElementById('feed');
+  feed.appendChild(commentElement);
+
+  feed.scrollTop = feed.scrollHeight;
+
 function increaseLikes(element) {
   const likeCountElement = element.nextElementSibling; // Get the like count span
   let currentCount = parseInt(likeCountElement.textContent); // Get current like count
   currentCount++; // Increase the count by 1
   likeCountElement.textContent = currentCount; // Update the displayed count
+  }
+
+  // Fade out older comments at a slower rate for better pacing
+  if (feed.children.length > maxComments) {
+    const oldestComment = feed.children[0];
+    oldestComment.classList.add('fadeOut');
+    setTimeout(() => {
+      oldestComment.remove();
+    }, 1500); // Slightly longer fade duration for a smoother exit
+  }
 }
-
-
-
-// Fade out older comments at a slower rate for better pacing
-if (feed.children.length > maxComments) {
-  const oldestComment = feed.children[0];
-  oldestComment.classList.add('fadeOut');
-  setTimeout(() => {
-    oldestComment.remove();
-  }, 1500); // Slightly longer fade duration for a smoother exit
-}
-
 
 // YouTube API Section
 let player;
