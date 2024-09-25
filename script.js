@@ -144,26 +144,41 @@ function addComment() {
 
 // YouTube API Section
 let player;
+let isVideoLoaded = false;
+
 function onYouTubeIframeAPIReady() {
+  loadRandomVideo();
+}
+
+function loadRandomVideo() {
+  const randomVideoID = getRandomVideoID();
   player = new YT.Player('player', {
-    videoId: getRandomVideoID(),
+    videoId: randomVideoID,
     playerVars: {
       autoplay: 1,
       controls: 0,
       mute: 1,
       loop: 1,
-      playlist: getRandomVideoID()
+      playlist: randomVideoID
     },
     events: {
-      onReady: onPlayerReady
+      onReady: onPlayerReady,
+      onStateChange: onPlayerStateChange
     }
   });
 }
 
 function onPlayerReady(event) {
   event.target.mute();
-  startAtRandomTime();
-  changeVideo();
+  isVideoLoaded = true;
+  startAtRandomTime(event.target);
+}
+
+function onPlayerStateChange(event) {
+  // Check if the video ended, and load a new one
+  if (event.data === YT.PlayerState.ENDED) {
+    loadRandomVideo();
+  }
 }
 
 function getRandomVideoID() {
@@ -205,24 +220,39 @@ function getRandomVideoID() {
   'JM20K--96BE',
   'AfkF30yPfK0',
   'VcfIsVNp4js',
-];
+  'u-WTfP3WJc4',
+  '4aeETEoNfOg',
+  'dKHBVf0z5co',
+  'yYTnHjD6GuE',
+  'nuncFLIR1Qw',
+  'RrzrOyeo5o8',
+  '3yk0in7QTHo',
+  'KF33eZXLvmU',
+  ];
   return videoIDs[Math.floor(Math.random() * videoIDs.length)];
 }
 
-function startAtRandomTime() {
+function startAtRandomTime(player) {
   const videoDuration = player.getDuration();
-  const bufferZone = 40;
-  const maxStartTime = videoDuration - bufferZone;
-  const randomStartTime = Math.floor(Math.random() * maxStartTime);
-  player.seekTo(randomStartTime, true);
+  if (videoDuration > 0) {
+    const bufferZone = 40; // seconds
+    const maxStartTime = videoDuration - bufferZone;
+    const randomStartTime = Math.floor(Math.random() * maxStartTime);
+    player.seekTo(randomStartTime, true);
+  }
 }
 
 function changeVideo() {
   setInterval(() => {
-    const randomVideoID = getRandomVideoID();
-    player.loadVideoById(randomVideoID);
+    if (isVideoLoaded) {
+      loadRandomVideo();
+    }
   }, Math.random() * (15000 - 5000) + 5000); // Switch every 5-15 seconds
 }
+
+// Start changing videos after the player is ready
+setTimeout(changeVideo, 10000); // Delay to ensure player is loaded
+
 
 // Ensure the music starts at half volume
 document.querySelector('audio').volume = 0.5;
