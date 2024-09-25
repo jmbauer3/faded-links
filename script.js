@@ -153,24 +153,32 @@ commentElement.appendChild(upvotes);
 
 
 
-  const commentsBubble = document.createElement('span');
-commentsBubble.className = 'commentsBubble';
-commentsBubble.innerHTML = `<i class="fas fa-comment"></i> ${Math.floor(Math.random() * 4)}`;
+// Make sure to attach the comment button properly
+const commentsBubble = document.createElement('span');
+commentsBubble.className = 'commentsBubble comment-btn';
+commentsBubble.innerHTML = `<i class="fas fa-comment"></i> ${Math.floor(Math.random() * 4)}`; // Icon + random number
 
-// Create the input field and assign class
+// Create an input field for user comments
 const commentInput = document.createElement('input');
+commentInput.className = 'comment-input'; // Assign the correct class for styling
 commentInput.type = 'text';
 commentInput.placeholder = 'In the silence, I wonder...';
-commentInput.classList.add('comment-input'); // Assign the class here
+commentInput.style.display = 'none'; // Hidden initially
 
 // Append the input to the comments bubble
-commentsBubble.appendChild(commentInput);
+commentElement.appendChild(commentsBubble); // Append comment icon to the comment element
+commentElement.appendChild(commentInput); // Append the comment input box
 
-// Click event to show the input when comments bubble is clicked
+// Click event to show the input when the comments bubble is clicked
 commentsBubble.onclick = function() {
-  commentInput.classList.toggle('visible'); // Toggle visibility with CSS class
+  if (commentInput.style.display === 'none') {
+    commentInput.style.display = 'block'; // Show the input
+  } else {
+    commentInput.style.display = 'none'; // Hide the input if clicked again
+  }
   commentInput.focus(); // Automatically focus the input
 };
+
 
 // Keydown event to handle submitting the comment on Enter
 commentInput.onkeydown = function(event) {

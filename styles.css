@@ -233,19 +233,28 @@ body {
   padding-bottom: 50px; /* Add padding to make space for the comment input */
 }
 
-/* Style for the input field */
+.comment-btn {
+  cursor: pointer;
+  display: inline-block;
+  margin-right: 10px;
+  color: #b3b3d4;
+}
+
+.comment-btn i {
+  margin-right: 5px;
+  color: #e4e6eb; /* Icon color */
+}
+
 .comment-input {
-  position: relative; /* Ensure it stays below the buttons */
-  display: none; /* Initially hidden */
-  width: 100%; /* Full width */
-  margin-top: 10px; /* Space above the input */
+  display: none; /* Hidden initially */
+  width: 100%;
+  margin-top: 10px;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #f9f9f9;
 }
 
-/* Show input when the 'visible' class is added */
 .comment-input.visible {
-  display: block;
+  display: block; /* Show input when visible class is added */
 }
