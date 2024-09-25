@@ -119,19 +119,32 @@ function addComment() {
   commentText.textContent = zalgifiedComment;
   commentElement.appendChild(commentText);
 
-  const upvotes = document.createElement('span');
+  
+
+  cconst upvotes = document.createElement('span');
 upvotes.className = 'upvotes';
 
 // Create a like count element
-  const likeCount = document.createElement('span');
-  likeCount.className = 'likeCount'; // Class for styling if needed
-  likeCount.textContent = Math.floor(Math.random() * 8); // Initial random like count
+const likeCount = document.createElement('span');
+likeCount.className = 'likeCount'; // Class for styling if needed
+likeCount.textContent = Math.floor(Math.random() * 8); // Initial random like count
 
 // Create the thumbs-up icon and make it clickable
-  const thumbsUpIcon = document.createElement('i');
-  thumbsUpIcon.className = 'fas fa-thumbs-up';
-  thumbsUpIcon.onclick = function() {
-  increaseLikes(this); // Call the increaseLikes function when clicked
+const thumbsUpIcon = document.createElement('i');
+thumbsUpIcon.className = 'fas fa-thumbs-up';
+
+// Variable to track if the upvote has been made
+let hasUpvoted = false;
+
+// Click handler for the thumbs-up icon
+thumbsUpIcon.onclick = function() {
+  if (!hasUpvoted) { // Check if the user has already upvoted
+    hasUpvoted = true; // Set to true to prevent further upvoting
+    const currentCount = parseInt(likeCount.textContent, 10);
+    likeCount.textContent = currentCount + 1; // Increment like count
+    thumbsUpIcon.classList.add('highlighted'); // Add highlighted class to icon
+    thumbsUpIcon.style.pointerEvents = 'none'; // Disable further clicks on the icon
+  }
 };
 
 // Append the icon and like count to the upvotes span
@@ -139,6 +152,7 @@ upvotes.appendChild(thumbsUpIcon);
 upvotes.appendChild(likeCount);
 
 commentElement.appendChild(upvotes);
+
 
 
   const commentsBubble = document.createElement('span');
