@@ -248,20 +248,7 @@ function addUserComment(userComment, parentCommentElement) {
 
 
 
-// Select comment count element
-const commentCountElement = document.querySelector('.comment-count');
 
-// Function to increment comment count
-function incrementCommentCount() {
-  const currentCount = parseInt(commentCountElement.innerText, 10);
-  commentCountElement.innerText = currentCount + 1;
-}
-
-// Function to handle comment submission
-document.querySelector('.reply-submit').addEventListener('click', function () {
-  // Assuming you already handle adding the comment to the DOM
-  incrementCommentCount();
-});
 
 
 
