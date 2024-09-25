@@ -3,42 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Faded Links</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Updated to match your file -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="icon" href="assets/favicon/favicon.ico" type="image"> <!-- Favicon added here -->
+    <title>End Page</title>
     <style>
         body {
-            background-color: black;
-            color: white;
-            font-family: 'Arial', sans-serif;
-            text-align: center;
-        }
-        #video-wall {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 10px;
-            padding: 20px;
-            max-width: 1200px;
-            margin: auto;
-        }
-        .video-thumbnail {
-            position: relative;
-            overflow: hidden;
-            border: 2px solid white;
-            border-radius: 10px;
-        }
-        .video-thumbnail img {
-            width: 100%;
-            height: auto;
-            transition: transform 0.3s;
-        }
-        .video-thumbnail:hover img {
-            transform: scale(1.1);
-        }
-        /* End Page Styles */
-        .end-page {
-            display: none; /* Initially hidden, shown on music end */
             background-color: black;
             color: white;
             display: flex;
@@ -48,8 +15,9 @@
             height: 100vh;
             font-family: 'Your Special Font', sans-serif; /* Replace with your font */
             text-align: center;
+            overflow: hidden; /* Prevent scrolling */
         }
-        .end-page a {
+        a {
             color: white;
             text-decoration: underline;
             margin-top: 20px;
@@ -59,324 +27,76 @@
             font-size: 0.8em;
             color: gray;
         }
+        .video-wall {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 10px;
+            width: 100%;
+            padding: 20px;
+            overflow-y: auto; /* Allow scrolling */
+        }
+        iframe {
+            width: 100%;
+            height: 200px; /* Adjust height as needed */
+            border: none;
+        }
     </style>
 </head>
 <body>
-
-  <!-- Video Background -->
-  <div id="video-background">
-    <div id="player">
-      <!-- YouTube iframe will load here -->
+    <h1>Why am I still awake?</h1>
+    <h2>Why am I still here?</h2>
+    <a href="https://dumpl.ink/johnbauer" target="_blank">Your Portfolio 🌐</a>
+    <a href="https://www.tiktok.com/@MobiusCoffee" target="_blank">Your TikTok 🎶</a>
+    <div class="credits">
+        <p>Credits for the background music: Drunk in Carthage by Ee 🎵</p>
     </div>
-  </div>
-
-  <!-- Move title and music player outside the feed -->
-  <div id="header">
-    <h1 id="title">Faded Links</h1>
-    <div class="music-player">
-      <audio id="background-music" controls autoplay loop volume="0.5">
-        <source src="assets/drunk-in-carthage.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-      </audio>
+    <div class="video-wall">
+        <iframe src="https://www.youtube.com/embed/yb6vArLA9cA" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/eD81CsAFmDU" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/coRWtkRpNhw" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/f7nPA1oEbqg" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/OLS9yCmYfNw" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/0r2x7G0hwCw" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/V6SR4lNqjME" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/nD1f1Ian0kA" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/Mks-Y_PF_7o" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/F7SWoZNpSVw" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/2WcIK_8f7oQ" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/8AHCfZTRGiI" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/FDFqzVy2nI0" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/VYOjWnS4cMY" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/kn2f1AVB9W4" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/ft3b1-Cm-0M" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/6qIYgwebhM" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/PENk6NBEyPs" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/qkNa5xzOe5U" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/kF7DW_mZatA" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/93axfl2xlao" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/zfaOf70M4xs" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/CZRH68Ib1Ko" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/N-aK6JnyFmk" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/Vrs0XgnXsxk" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/VwBIVWX8YtQ" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/K4_Qzx-E2LQ" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/HyHNuVaZJ-k" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/LGQCPOMcYJQ" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/e4QGnppJ-ys" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/gxEPV4kolz0" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/m2uTFF_3MaA" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/TbSm6HsX_ek" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/phfjlcGlT3g" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/JM20K--96BE" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/AfkF30yPfK0" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/VcfIsVNp4js" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/u-WTfP3WJc4" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/4aeETEoNfOg" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/dKHBVf0z5co" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/yYTnHjD6GuE" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/nuncFLIR1Qw" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/RrzrOyeo5o8" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/3yk0in7QTHo" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/KF33eZXLvmU" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/_CLzzUfDjUo" allowfullscreen></iframe>
     </div>
-  </div>
-
-  <!-- Song credits -->
-  <div id="credits">
-    <h2>Credits for Background Music:</h2>
-    <p>Drunk in Carthage - Your Artist Name</p>
-  </div>
-
-  <!-- Video wall -->
-  <div id="video-wall">
-    <div class="video-thumbnail">
-      <a href="https://www.youtube.com/watch?v=yb6vArLA9cA" target="_blank">
-        <img src="https://img.youtube.com/vi/yb6vArLA9cA/hqdefault.jpg" alt="Video 1">
-      </a>
-    </div>
-    <div class="video-thumbnail">
-      <a href="https://www.youtube.com/watch?v=eD81CsAFmDU" target="_blank">
-        <img src="https://img.youtube.com/vi/eD81CsAFmDU/hqdefault.jpg" alt="Video 2">
-      </a>
-    </div>
-    <div class="video-thumbnail">
-      <a href="https://www.youtube.com/watch?v=coRWtkRpNhw" target="_blank">
-        <img src="https://img.youtube.com/vi/coRWtkRpNhw/hqdefault.jpg" alt="Video 3">
-      </a>
-    </div>
-    <div class="video-thumbnail">
-      <a href="https://www.youtube.com/watch?v=f7nPA1oEbqg" target="_blank">
-        <img src="https://img.youtube.com/vi/f7nPA1oEbqg/hqdefault.jpg" alt="Video 4">
-      </a>
-    </div>
-    <div class="video-thumbnail">
-      <a href="https://www.youtube.com/watch?v=OLS9yCmYfNw" target="_blank">
-        <img src="https://img.youtube.com/vi/OLS9yCmYfNw/hqdefault.jpg" alt="Video 5">
-      </a>
-    </div>
-    <div class="video-thumbnail">
-      <a href="https://www.youtube.com/watch?v=0r2x7G0hwCw" target="_blank">
-        <img src="https://img.youtube.com/vi/0r2x7G0hwCw/hqdefault.jpg" alt="Video 6">
-      </a>
-    </div>
-    <div class="video-thumbnail">
-      <a href="https://www.youtube.com/watch?v=V6SR4lNqjME" target="_blank">
-        <img src="https://img.youtube.com/vi/V6SR4lNqjME/hqdefault.jpg" alt="Video 7">
-      </a>
-    </div>
-    <div class="video-thumbnail">
-      <a href="https://www.youtube.com/watch?v=nD1f1Ian0kA" target="_blank">
-        <img src="https://img.youtube.com/vi/nD1f1Ian0kA/hqdefault.jpg" alt="Video 8">
-      </a>
-    </div>
-    <div class="video-thumbnail">
-      <a href="https://www.youtube.com/watch?v=Mks-Y_PF_7o" target="_blank">
-        <img src="https://img.youtube.com/vi/Mks-Y_PF_7o/hqdefault.jpg" alt="Video 9">
-      </a>
-    </div>
-    <div class="video-thumbnail">
-      <a href="https://www.youtube.com/watch?v=F7SWoZNpSVw" target="_blank">
-        <img src="https://img.youtube.com/vi/F7SWoZNpSVw/hqdefault.jpg" alt="Video 10">
-      </a>
-    </div>
-    <div class="video-thumbnail">
-      <a href="https://www.youtube.com/watch?v=2WcIK_8f7oQ" target="_blank">
-        <img src="https://img.youtube.com/vi/2WcIK_8f7oQ/hqdefault.jpg" alt="Video 11">
-      </a>
-    </div>
-    <div class="video-thumbnail">
-      <a href="https://www.youtube.com/watch?v=8AHCfZTRGiI" target="_blank">
-        <img src="https://img.youtube.com/vi/8AHCfZTRGiI/hqdefault.jpg" alt="Video 12">
-      </a>
-    </div>
-    <div class="video-thumbnail">
-      <a href="https://www.youtube.com/watch?v=FDFqzVy2nI0" target="_blank">
-        <img src="https://img.youtube.com/vi/FDFqzVy2nI0/hqdefault.jpg" alt="Video 13">
-      </a>
-    </div>
-    <div class="video-thumbnail">
-      <a href="https://www.youtube.com/watch?v=VYOjWnS4cMY" target="_blank">
-        <img src="https://img.youtube.com/vi/VYOjWnS4cMY/hqdefault.jpg" alt="Video 14">
-      </a>
-    </div>
-    <div class="video-thumbnail">
-      <a href="https://www.youtube.com/watch?v=kn2f1AVB9W4" target="_blank">
-        <img src="https://img.youtube.com/vi/kn2f1AVB9W4/hqdefault.jpg" alt="Video 15">
-      </a>
-    </div>
-    <div class="video-thumbnail">
-      <a href="https://www.youtube.com/watch?v=ft3b1-Cm-0M" target="_blank">
-        <img src="https://img.youtube.com/vi/ft3b1-Cm-0M/hqdefault.jpg" alt="Video 16">
-      </a>
-    </div>
-    <div class="video-thumbnail">
-      <a href="https://www.youtube.com/watch?v=6qIYgwebhM" target="_blank">
-        <img src="https://img.youtube.com/vi/6qIYgwebhM/hqdefault.jpg" alt="Video 17">
-      </a>
-    </div>
-    <div class="video-thumbnail">
-      <a href="https://www.youtube.com/watch?v=PENk6NBEyPs" target="_blank">
-        <img src="https://img.youtube.com/vi/PENk6NBEyPs/hqdefault.jpg" alt="Video 18">
-      </a>
-    </div>
-    <div class="video-thumbnail">
-      <a href="https://www.youtube.com/watch?v=qkNa5xzOe5U" target="_blank">
-        <img src="https://img.youtube.com/vi/qkNa5xzOe5U/hqdefault.jpg" alt="Video 19">
-      </a>
-    </div>
-    <div class="video-thumbnail">
-      <a href="https://www.youtube.com/watch?v=kF7DW_mZatA" target="_blank">
-        <img src="https://img.youtube.com/vi/kF7DW_mZatA/hqdefault.jpg" alt="Video 20">
-      </a>
-    </div>
-    <div class="video-thumbnail">
-      <a href="https://www.youtube.com/watch?v=93axfl2xlao" target="_blank">
-        <img src="https://img.youtube.com/vi/93axfl2xlao/hqdefault.jpg" alt="Video 21">
-      </a>
-    </div>
-    <div class="video-thumbnail">
-      <a href="https://www.youtube.com/watch?v=zfaOf70M4xs" target="_blank">
-        <img src="https://img.youtube.com/vi/zfaOf70M4xs/hqdefault.jpg" alt="Video 22">
-      </a>
-    </div>
-    <div class="video-thumbnail">
-      <a href="https://www.youtube.com/watch?v=CZRH68Ib1Ko" target="_blank">
-        <img src="https://img.youtube.com/vi/CZRH68Ib1Ko/hqdefault.jpg" alt="Video 23">
-      </a>
-    </div>
-    <div class="video-thumbnail">
-      <a href="https://www.youtube.com/watch?v=N-aK6JnyFmk" target="_blank">
-        <img src="https://img.youtube.com/vi/N-aK6JnyFmk/hqdefault.jpg" alt="Video 24">
-      </a>
-    </div>
-    <div class="video-thumbnail">
-      <a href="https://www.youtube.com/watch?v=Vrs0XgnXsxk" target="_blank">
-        <img src="https://img.youtube.com/vi/Vrs0XgnXsxk/hqdefault.jpg" alt="Video 25">
-      </a>
-    </div>
-    <div class="video-thumbnail">
-      <a href="https://www.youtube.com/watch?v=VwBIVWX8YtQ" target="_blank">
-        <img src="https://img.youtube.com/vi/VwBIVWX8YtQ/hqdefault.jpg" alt="Video 26">
-      </a>
-    </div>
-    <div class="video-thumbnail">
-      <a href="https://www.youtube.com/watch?v=K4_Qzx-E2LQ" target="_blank">
-        <img src="https://img.youtube.com/vi/K4_Qzx-E2LQ/hqdefault.jpg" alt="Video 27">
-      </a>
-    </div>
-    <div class="video-thumbnail">
-      <a href="https://www.youtube.com/watch?v=HyHNuVaZJ-k" target="_blank">
-        <img src="https://img.youtube.com/vi/HyHNuVaZJ-k/hqdefault.jpg" alt="Video 28">
-      </a>
-    </div>
-    <div class="video-thumbnail">
-      <a href="https://www.youtube.com/watch?v=LGQCPOMcYJQ" target="_blank">
-        <img src="https://img.youtube.com/vi/LGQCPOMcYJQ/hqdefault.jpg" alt="Video 29">
-      </a>
-    </div>
-    <div class="video-thumbnail">
-      <a href="https://www.youtube.com/watch?v=e4QGnppJ-ys" target="_blank">
-        <img src="https://img.youtube.com/vi/e4QGnppJ-ys/hqdefault.jpg" alt="Video 30">
-      </a>
-    </div>
-    <div class="video-thumbnail">
-      <a href="https://www.youtube.com/watch?v=gxEPV4kolz0" target="_blank">
-        <img src="https://img.youtube.com/vi/gxEPV4kolz0/hqdefault.jpg" alt="Video 31">
-      </a>
-    </div>
-    <div class="video-thumbnail">
-      <a href="https://www.youtube.com/watch?v=m2uTFF_3MaA" target="_blank">
-        <img src="https://img.youtube.com/vi/m2uTFF_3MaA/hqdefault.jpg" alt="Video 32">
-      </a>
-    </div>
-    <div class="video-thumbnail">
-      <a href="https://www.youtube.com/watch?v=TbSm6HsX_ek" target="_blank">
-        <img src="https://img.youtube.com/vi/TbSm6HsX_ek/hqdefault.jpg" alt="Video 33">
-      </a>
-    </div>
-    <div class="video-thumbnail">
-      <a href="https://www.youtube.com/watch?v=phfjlcGlT3g" target="_blank">
-        <img src="https://img.youtube.com/vi/phfjlcGlT3g/hqdefault.jpg" alt="Video 34">
-      </a>
-    </div>
-    <div class="video-thumbnail">
-      <a href="https://www.youtube.com/watch?v=JM20K--96BE" target="_blank">
-        <img src="https://img.youtube.com/vi/JM20K--96BE/hqdefault.jpg" alt="Video 35">
-      </a>
-    </div>
-    <div class="video-thumbnail">
-      <a href="https://www.youtube.com/watch?v=AfkF30yPfK0" target="_blank">
-        <img src="https://img.youtube.com/vi/AfkF30yPfK0/hqdefault.jpg" alt="Video 36">
-      </a>
-    </div>
-    <div class="video-thumbnail">
-      <a href="https://www.youtube.com/watch?v=VcfIsVNp4js" target="_blank">
-        <img src="https://img.youtube.com/vi/VcfIsVNp4js/hqdefault.jpg" alt="Video 37">
-      </a>
-    </div>
-    <div class="video-thumbnail">
-      <a href="https://www.youtube.com/watch?v=u-WTfP3WJc4" target="_blank">
-        <img src="https://img.youtube.com/vi/u-WTfP3WJc4/hqdefault.jpg" alt="Video 38">
-      </a>
-    </div>
-    <div class="video-thumbnail">
-      <a href="https://www.youtube.com/watch?v=4aeETEoNfOg" target="_blank">
-        <img src="https://img.youtube.com/vi/4aeETEoNfOg/hqdefault.jpg" alt="Video 39">
-      </a>
-    </div>
-    <div class="video-thumbnail">
-      <a href="https://www.youtube.com/watch?v=dKHBVf0z5co" target="_blank">
-        <img src="https://img.youtube.com/vi/dKHBVf0z5co/hqdefault.jpg" alt="Video 40">
-      </a>
-    </div>
-    <div class="video-thumbnail">
-      <a href="https://www.youtube.com/watch?v=yYTnHjD6GuE" target="_blank">
-        <img src="https://img.youtube.com/vi/yYTnHjD6GuE/hqdefault.jpg" alt="Video 41">
-      </a>
-    </div>
-    <div class="video-thumbnail">
-      <a href="https://www.youtube.com/watch?v=nuncFLIR1Qw" target="_blank">
-        <img src="https://img.youtube.com/vi/nuncFLIR1Qw/hqdefault.jpg" alt="Video 42">
-      </a>
-    </div>
-    <div class="video-thumbnail">
-      <a href="https://www.youtube.com/watch?v=RrzrOyeo5o8" target="_blank">
-        <img src="https://img.youtube.com/vi/RrzrOyeo5o8/hqdefault.jpg" alt="Video 43">
-      </a>
-    </div>
-    <div class="video-thumbnail">
-      <a href="https://www.youtube.com/watch?v=3yk0in7QTHo" target="_blank">
-        <img src="https://img.youtube.com/vi/3yk0in7QTHo/hqdefault.jpg" alt="Video 44">
-      </a>
-    </div>
-    <div class="video-thumbnail">
-      <a href="https://www.youtube.com/watch?v=KF33eZXLvmU" target="_blank">
-        <img src="https://img.youtube.com/vi/KF33eZXLvmU/hqdefault.jpg" alt="Video 45">
-      </a>
-    </div>
-    <div class="video-thumbnail">
-      <a href="https://www.youtube.com/watch?v=_CLzzUfDjUo" target="_blank">
-        <img src="https://img.youtube.com/vi/_CLzzUfDjUo/hqdefault.jpg" alt="Video 46">
-      </a>
-    </div>
-  </div>
-
-  <!-- Hidden End Page -->
-  <div class="end-page">
-    <h1>Why am I still awake? Why am I still here?</h1>
-    <a href="portfolio.html">View My Portfolio</a>
-    <a href="https://twitter.com/yourtwitter" target="_blank">Twitter</a>
-    <a href="https://instagram.com/yourinstagram" target="_blank">Instagram</a>
-    <p>Credits: [Your Song Title]</p>
-    <p>Videos:</p>
-    <ul>
-      <li><a href="https://www.youtube.com/watch?v=yb6vArLA9cA" target="_blank">Video 1</a></li>
-      <li><a href="https://www.youtube.com/watch?v=eD81CsAFmDU" target="_blank">Video 2</a></li>
-      <li><a href="https://www.youtube.com/watch?v=coRWtkRpNhw" target="_blank">Video 3</a></li>
-      <li><a href="https://www.youtube.com/watch?v=f7nPA1oEbqg" target="_blank">Video 4</a></li>
-      <li><a href="https://www.youtube.com/watch?v=OLS9yCmYfNw" target="_blank">Video 5</a></li>
-      <li><a href="https://www.youtube.com/watch?v=0r2x7G0hwCw" target="_blank">Video 6</a></li>
-      <li><a href="https://www.youtube.com/watch?v=V6SR4lNqjME" target="_blank">Video 7</a></li>
-      <li><a href="https://www.youtube.com/watch?v=nD1f1Ian0kA" target="_blank">Video 8</a></li>
-      <li><a href="https://www.youtube.com/watch?v=Mks-Y_PF_7o" target="_blank">Video 9</a></li>
-      <li><a href="https://www.youtube.com/watch?v=F7SWoZNpSVw" target="_blank">Video 10</a></li>
-      <li><a href="https://www.youtube.com/watch?v=2WcIK_8f7oQ" target="_blank">Video 11</a></li>
-      <li><a href="https://www.youtube.com/watch?v=8AHCfZTRGiI" target="_blank">Video 12</a></li>
-      <li><a href="https://www.youtube.com/watch?v=FDFqzVy2nI0" target="_blank">Video 13</a></li>
-      <li><a href="https://www.youtube.com/watch?v=VYOjWnS4cMY" target="_blank">Video 14</a></li>
-      <li><a href="https://www.youtube.com/watch?v=kn2f1AVB9W4" target="_blank">Video 15</a></li>
-      <li><a href="https://www.youtube.com/watch?v=ft3b1-Cm-0M" target="_blank">Video 16</a></li>
-      <li><a href="https://www.youtube.com/watch?v=6qIYgwebhM" target="_blank">Video 17</a></li>
-      <li><a href="https://www.youtube.com/watch?v=PENk6NBEyPs" target="_blank">Video 18</a></li>
-      <li><a href="https://www.youtube.com/watch?v=qkNa5xzOe5U" target="_blank">Video 19</a></li>
-      <li><a href="https://www.youtube.com/watch?v=kF7DW_mZatA" target="_blank">Video 20</a></li>
-      <li><a href="https://www.youtube.com/watch?v=93axfl2xlao" target="_blank">Video 21</a></li>
-      <li><a href="https://www.youtube.com/watch?v=zfaOf70M4xs" target="_blank">Video 22</a></li>
-      <li><a href="https://www.youtube.com/watch?v=CZRH68Ib1Ko" target="_blank">Video 23</a></li>
-      <li><a href="https://www.youtube.com/watch?v=N-aK6JnyFmk" target="_blank">Video 24</a></li>
-      <li><a href="https://www.youtube.com/watch?v=Vrs0XgnXsxk" target="_blank">Video 25</a></li>
-      <li><a href="https://www.youtube.com/watch?v=VwBIVWX8YtQ" target="_blank">Video 26</a></li>
-      <li><a href="https://www.youtube.com/watch?v=K4_Qzx-E2LQ" target="_blank">Video 27</a></li>
-      <li><a href="https://www.youtube.com/watch?v=HyHNuVaZJ-k" target="_blank">Video 28</a></li>
-      <li><a href="https://www.youtube.com/watch?v=LGQCPOMcYJQ" target="_blank">Video 29</a></li>
-      <li><a href="https://www.youtube.com/watch?v=e4QGnppJ-ys" target="_blank">Video 30</a></li>
-      <li><a href="https://www.youtube.com/watch?v=gxEPV4kolz0" target="_blank">Video 31</a></li>
-      <li><a href="https://www.youtube.com/watch?v=m2uTFF_3MaA" target="_blank">Video 32</a></li>
-      <li><a href="https://www.youtube.com/watch?v=TbSm6HsX_ek" target="_blank">Video 33</a></li>
-      <li><a href="https://www.youtube.com/watch?v=phfjlcGlT3g" target="_blank">Video 34</a></li>
-      <li><a href="https://www.youtube.com/watch?v=JM20K--96BE" target="_blank">Video 35</a></li>
-      <li><a href="https://www.youtube.com/watch?v=AfkF30yPfK0" target="_blank">Video 36</a></li>
-      <li><a href="https://www.youtube.com/watch?v=VcfIsVNp4js" target="_blank">Video 37</a></li>
-      <li><a href="https://www.youtube.com/watch?v=u-WTfP3WJc4" target="_blank">Video 38</a></li>
-      <li><a href="https://www.youtube.com/watch?v=4aeETEoNfOg" target="_blank">Video 39</a></li>
-      <li><a href="https://www.youtube.com/watch?v=dKHBVf0z5co" target="_blank">Video 40</a></li>
-      <li><a href="https://www.youtube.com/watch?v=yYTnHjD6GuE" target="_blank">Video 41</a></li>
-      <li><a href="https://www.youtube.com/watch?v=nuncFLIR1Qw" target="_blank">Video 42</a></li>
-      <li><a href="https://www.youtube.com/watch?v=RrzrOyeo5o8" target="_blank">Video 43</a></li>
-      <li><a href="https://www.youtube.com/watch?v=3yk0in7QTHo" target="_blank">Video 44</a></li>
-      <li><a href="https://www.youtube.com/watch?v=KF33eZXLvmU" target="_blank">Video 45</a></li>
-      <li><a href="https://www.youtube.com/watch?v=_CLzzUfDjUo" target="_blank">Video 46</a></li>
-    </ul>
-  </div>
 </body>
 </html>
