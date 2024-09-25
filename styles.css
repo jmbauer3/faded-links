@@ -154,8 +154,9 @@ body {
 }
 
 /* Keep the like counter's original color */
-.like-btn .like-counter {
+.like-counter {
   color: #e4e6eb; /* Original color for the counter */
+  margin-left: 4px; /* Optional: Adjust spacing */
 }
 
 /* Like button clicked state */
@@ -163,20 +164,10 @@ body {
   color: #4a90e2; /* Only change the thumbs-up icon color */
 }
 
-/* Make sure the counter does not change color on like */
-.like-btn .like-counter {
-  color: #b3b3d4; /* Original color for the counter */
-}
-
 /* Keep the layout of the like button stable */
 .like-btn {
   display: flex;
   align-items: center;
-}
-
-/* Optional: Additional spacing for the counter */
-.like-btn .like-counter {
-  margin-left: 4px; /* Adjust spacing if needed */
 }
 
 /* Reply (comment input) box */
@@ -187,7 +178,7 @@ body {
 
 .reply-box textarea {
   width: 100%;
-  padding: 8px; /* Smaller padding */
+  padding: 8px;
   background-color: #2c2c54;
   border: 1px solid #5a5a8a;
   color: #e4e6eb;
@@ -201,24 +192,24 @@ body {
 
 .reply-submit {
   background-color: #3b3b72;
-  padding: 4px 8px; /* Smaller padding for the reply button */
-  font-size: 0.8em; /* Slightly smaller font size */
+  padding: 4px 8px;
+  font-size: 0.8em;
 }
 
 .reply-submit:hover {
-  background-color: #4b6587; /* Highlight on hover */
+  background-color: #4b6587;
 }
 
 /* Style for the submitted reply */
 .user-reply {
   margin-top: 10px;
-  font-style: italic; /* Italic to distinguish replies */
-  color: #b3b3d4; /* Slightly lighter text */
+  font-style: italic;
+  color: #b3b3d4;
 }
 
 /* Style for the thumbs-up and comment icons */
 .actions {
-  margin-top: 8px; /* Reduced margin */
+  margin-top: 8px;
   display: flex;
   justify-content: flex-start;
 }
@@ -226,25 +217,26 @@ body {
 .like-btn, .comment-btn {
   cursor: pointer;
   display: inline-block;
-  margin-right: 10px; /* Reduced margin */
+  margin-right: 10px;
   color: #b3b3d4;
 }
 
 /* Hover effect for both buttons */
 .like-btn:hover, .comment-btn:hover {
-  color: #7a86b6; /* Same hover effect for both buttons */
+  color: #7a86b6;
 }
 
 /* Like button clicked state */
-.like-btn.liked {
-  color: #4a90e2; /* Change color when liked */
+.like-btn.liked .fa-thumbs-up {
+  color: #4a90e2;
 }
 
-/* Make sure the like icon and comment icon maintain their structure */
+/* Ensure icons retain their structure */
 .like-btn i, .comment-btn i {
-  margin-right: 4px; /* Reduced icon spacing */
+  margin-right: 4px;
   color: #e4e6eb;
 }
+
 
 /* Keep the like button's layout stable */
 .like-btn {
