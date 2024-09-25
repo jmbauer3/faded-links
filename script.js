@@ -219,6 +219,31 @@ commentsBubble.onclick = function() {
 // }
 
 
+
+
+// Update the addUserComment function to place comments under their parent comment
+// Function to add user comments under the parent comment
+function addUserComment(userComment, parentCommentElement) {
+  const userCommentElement = document.createElement('div');
+  userCommentElement.className = 'child-comment'; // Use the child-comment class instead
+
+  const userCommentText = document.createElement('p');
+  userCommentText.textContent = userComment;
+
+  userCommentElement.appendChild(userCommentText);
+  
+  // Append the user's comment under the parent comment
+  parentCommentElement.appendChild(userCommentElement);
+
+  // Find the comments bubble to update its count
+  const commentsBubble = parentCommentElement.querySelector('.commentsBubble');
+
+  // Update the count in the comments bubble
+  let currentCount = parseInt(commentsBubble.innerText.match(/\d+/)[0]) || 0; // Get the current count
+  commentsBubble.innerHTML = `<i class="fas fa-comment"></i> ${currentCount + 1}`; // Increment the count
+}
+
+// Keydown event to handle submitting the comment on Enter
 commentInput.onkeydown = function(event) {
   if (event.key === 'Enter') {
     const userComment = commentInput.value.trim(); // Get user comment
@@ -229,37 +254,6 @@ commentInput.onkeydown = function(event) {
     }
   }
 };
-
-// Update the addUserComment function to place comments under their parent comment
-// Function to add user comments under the parent comment
-function addUserComment(userComment, parentCommentElement) {
-  const userCommentElement = document.createElement('div');
-  userCommentElement.className = 'child-comment'; // Use the child-comment class instead
-
-  // Remove inline styling since we will apply styles from CSS
-  // userCommentElement.style.backgroundColor = '#333344'; // Match the theme
-  // userCommentElement.style.padding = '10px';
-  // userCommentElement.style.marginTop = '5px';
-  // userCommentElement.style.borderRadius = '5px';
-  // userCommentElement.style.border = '1px solid #5a5a8a'; // Match border color
-
-  const userCommentText = document.createElement('p');
-  userCommentText.textContent = userComment;
-
-  userCommentElement.appendChild(userCommentText);
-  
-  // Append the user's comment under the parent comment
-  parentCommentElement.appendChild(userCommentElement);
-}
-
-
-const commentsBubble = parentCommentElement.querySelector('.commentsBubble');
-
-  // Update the count in the comments bubble
-  let currentCount = parseInt(commentsBubble.innerText.match(/\d+/)[0]) || 0; // Get the current count
-  commentsBubble.innerHTML = `<i class="fas fa-comment"></i> ${currentCount + 1}`; // Increment the count
-}
-
 
 
 
