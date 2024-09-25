@@ -219,7 +219,16 @@ commentsBubble.onclick = function() {
 // }
 
 
-
+commentInput.onkeydown = function(event) {
+  if (event.key === 'Enter') {
+    const userComment = commentInput.value.trim(); // Get user comment
+    if (userComment) {
+      addUserComment(userComment, commentElement); // Call a function to add the user's comment
+      commentInput.value = ''; // Clear the input
+      commentInput.style.display = 'none'; // Hide the input after submission
+    }
+  }
+};
 
 // Update the addUserComment function to place comments under their parent comment
 // Function to add user comments under the parent comment
@@ -251,16 +260,7 @@ const commentsBubble = parentCommentElement.querySelector('.commentsBubble');
   commentsBubble.innerHTML = `<i class="fas fa-comment"></i> ${currentCount + 1}`; // Increment the count
 }
 
-commentInput.onkeydown = function(event) {
-  if (event.key === 'Enter') {
-    const userComment = commentInput.value.trim(); // Get user comment
-    if (userComment) {
-      addUserComment(userComment, commentElement); // Call a function to add the user's comment
-      commentInput.value = ''; // Clear the input
-      commentInput.style.display = 'none'; // Hide the input after submission
-    }
-  }
-};
+
 
 
 
