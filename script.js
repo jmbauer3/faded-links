@@ -277,25 +277,34 @@ document.querySelector('audio').volume = 0.5;
 // Add event listeners for dynamically created comments
 document.addEventListener('click', (event) => {
   // Like functionality
-  if (event.target.closest('.upvotes')) {
-    let likeIcon = event.target.closest('.upvotes').querySelector('i');
-    let likeCount = event.target.closest('.upvotes').textContent.trim().split(' ')[1]; 
-    likeCount = parseInt(likeCount);
+  if (event.target.closest('.like-btn')) {
+    let upvoteElement = event.target.closest('.like-btn');
+    let likeIcon = upvoteElement.querySelector('i');
+    let likeCountText = upvoteElement.textContent.trim().split(' ')[1];
+
+    // Parse the like count safely
+    let likeCount = parseInt(likeCountText);
+    if (isNaN(likeCount)) {
+      likeCount = 0; // Default to 0 if parsing fails
+    }
+
     likeIcon.classList.toggle('liked');
     if (likeIcon.classList.contains('liked')) {
       likeCount += 1;
     } else {
       likeCount -= 1;
     }
-    event.target.closest('.upvotes').innerHTML = `<i class="fas fa-thumbs-up liked"></i> ${likeCount}`;
+
+    // Update the inner HTML correctly
+    upvoteElement.innerHTML = `<i class="fas fa-thumbs-up ${likeIcon.classList.contains('liked') ? 'liked' : ''}"></i> ${likeCount}`;
   }
-  
+
   // Comment functionality (e.g., reply box toggle)
-  if (event.target.closest('.commentsBubble')) {
+  if (event.target.closest('.comment-btn')) {
     let commentBox = event.target.closest('.comment').querySelector('.reply-box');
     commentBox.style.display = (commentBox.style.display === 'none' || !commentBox.style.display) ? 'block' : 'none';
   }
-  
+
   // Handle reply submission
   if (event.target.classList.contains('reply-submit')) {
     const replyBox = event.target.previousElementSibling;
