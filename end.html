@@ -23,24 +23,25 @@
             margin: 0;
             text-align: center;
             font-family: 'Courier New', Courier, monospace; /* Same font as Faded Links */
+            color: #b3b3d4; /* Changed to purple */
         }
         h1 {
             margin-bottom: 20px; /* Space between title and subtitle */
         }
         a {
-            color: #e4e6eb; /* Light text color */
+            color: #b3b3d4; /* Changed to purple for visibility */
             text-decoration: none; /* No underline */
             margin-top: 20px;
             transition: color 0.3s ease, text-shadow 0.3s ease; /* Smooth transitions */
         }
         a:hover {
-            color: #b3b3d4; /* Light gray on hover */
+            color: #d1d1e9; /* Light gray on hover */
             text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7); /* Enhance shadow on hover */
         }
         .credits {
             margin-top: 40px;
             font-size: 0.8em;
-            color: gray;
+            color: #d1d1e9; /* Adjusted to match theme */
         }
         .video-wall {
             display: grid;
@@ -61,17 +62,25 @@
             color: #d1d1e9; /* Soft off-white text for info */
         }
     </style>
+    <link rel="icon" href="assets/favicon/favicon.ico" type="image"> <!-- Favicon added here -->
 </head>
 <body>
     <h1><a href="index.html">Why am I still awake?</a></h1> <!-- Made the title a link -->
     <h2>Why am I still here?</h2>
-    <div class="video-wall-info">This video wall showcases the possible videos that can be found in the background of the main page.</div>
-    <a href="https://dumpl.ink/johnbauer" target="_blank">I am words and stories.</a>
-    <a href="https://www.tiktok.com/@MobiusCoffee" target="_blank">Tiktok</a>
-    <a href="https://www.twitter.com/@MobiusCoffee" target="_blank">Twitter</a>
+    
+    <div class="video-wall-info">
+        <a href="https://dumpl.ink/johnbauer" target="_blank">John M. Bauer—I am words and stories.</a>
+        <br> <!-- Added line break for spacing -->
+        <a href="https://www.tiktok.com/@MobiusCoffee" target="_blank">Tiktok</a>
+        <br> <!-- Added line break for spacing -->
+        <a href="https://www.twitter.com/@MobiusCoffee" target="_blank">Twitter</a>
+        <br> <!-- Added line break for spacing -->
+        <a href="https://www.linkedin.com/in/jmbauer" target="_blank">LinkedIn</a>
+    </div>
     <div class="credits">
         <p>Background music: Drunk in Carthage by Ee</p>
     </div>
+    <div class="credits">These are the videos found in the background of the main page.</div>
     <div class="video-wall">
         <iframe src="https://www.youtube.com/embed/yb6vArLA9cA" allowfullscreen></iframe>
         <iframe src="https://www.youtube.com/embed/eD81CsAFmDU" allowfullscreen></iframe>
