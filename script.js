@@ -213,6 +213,12 @@ commentsBubble.onclick = function() {
 
 // Keydown event to handle submitting the comment on Enter
 // Keydown event to handle submitting the comment on Enter
+
+function updateCommentCount(element, count) {
+  element.innerHTML = `<i class="fas fa-comment"></i> ${count}`;
+}
+
+
 commentInput.onkeydown = function(event) {
   if (event.key === 'Enter') {
     const userComment = commentInput.value.trim(); // Get user comment
@@ -220,6 +226,8 @@ commentInput.onkeydown = function(event) {
       addUserComment(userComment, commentElement); // Call a function to add the user's comment
       commentInput.value = ''; // Clear the input
       commentInput.style.display = 'none'; // Hide the input after submission
+      totalCommentCount++;
+  updateCommentCount(commentsBubble, totalCommentCount); // Increment comment count
     }
   }
 };
