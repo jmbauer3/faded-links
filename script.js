@@ -1,6 +1,8 @@
 let zalgoIntensity = 0; // Start with no Zalgo effect
 let maxZalgoIntensity = 0.5; // Cap the intensity to something reasonable
 let zalgoStep = 0.01; // Small step for each comment added
+let markovEffect = false; // Ensure this is being toggled correctly
+let comments = []; // Array to store comments from CSV
 
 // Function to gradually increase the effects
 function increaseEffects() {
@@ -14,27 +16,38 @@ function zalgo(text, intensity) {
   const zalgoChars = ['̷', '̵', '̶', '̷', '͜', '͢', '͞', '͟', '͠', '͡'];
   return text.split('').map((char) => {
     if (Math.random() < intensity) {
-      // Add Zalgo characters based on intensity
       return char + zalgoChars[Math.floor(Math.random() * zalgoChars.length)];
     }
     return char; // Return the normal character
   }).join('');
 }
 
-// Function to add a comment to the feed
+// Debugging logs to track where the issue might be
 function addComment() {
+  console.log("addComment called"); // Check if this function is being called
   increaseEffects(); // Gradually apply effects
 
   let newComment;
+
   if (markovEffect) {
-    // Use Markov chain to generate new comment
+    console.log("Markov effect active"); // Check if Markov is being used
     const randomIndex = Math.floor(Math.random() * comments.length);
-    const randomStartWord = comments[randomIndex].split(' ')[0]; // Pick first word of a random comment
-    newComment = markov.generate(randomStartWord, 20); // Generate new comment
+    const randomStartWord = comments[randomIndex]?.split(' ')[0]; // Check for errors
+    if (randomStartWord) {
+      newComment = markov.generate(randomStartWord, 20);
+    } else {
+      console.log("Error: Invalid comment or empty comment array");
+      newComment = "Placeholder comment"; // Fallback
+    }
   } else {
     // Select a random comment from the CSV
     const randomIndex = Math.floor(Math.random() * comments.length);
-    newComment = comments[randomIndex].trim(); // Trim to remove extra spaces
+    if (comments[randomIndex]) {
+      newComment = comments[randomIndex].trim(); // Trim to remove extra spaces
+    } else {
+      console.log("Error: Comment array is empty or CSV not loaded");
+      newComment = "Placeholder comment"; // Fallback
+    }
   }
 
   // Apply Zalgo effect if applicable
@@ -77,6 +90,7 @@ function addComment() {
     }, 1000); // Wait for the fade-out animation to complete
   }
 }
+
 
 
 // Ensure the music starts at half volume
