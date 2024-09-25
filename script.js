@@ -119,40 +119,80 @@ function addComment() {
   commentText.textContent = zalgifiedComment;
   commentElement.appendChild(commentText);
 
-  const upvotes = document.createElement('span');
+
+
+
+  // Create an upvotes span to hold the like button and count
+const upvotes = document.createElement('span');
 upvotes.className = 'upvotes';
 
 // Create a like count element
 const likeCount = document.createElement('span');
 likeCount.className = 'likeCount'; // Class for styling if needed
-likeCount.textContent = Math.floor(Math.random() * 8); // Initial random like count
+likeCount.textContent = '0'; // Initialize like count to 0
 
-// Create the thumbs-up icon and make it clickable
+// Create the thumbs-up icon
 const thumbsUpIcon = document.createElement('i');
 thumbsUpIcon.className = 'fas fa-thumbs-up';
 
-// Variable to track if the upvote has been made
-let hasUpvoted = false;
+// Create a like button element to wrap the icon and count
+const likeBtn = document.createElement('span');
+likeBtn.className = 'like-btn'; // Ensure it has the class for event handling
+likeBtn.appendChild(thumbsUpIcon);
+likeBtn.appendChild(likeCount);
 
-// Click handler for the thumbs-up icon
-thumbsUpIcon.onclick = function() {
-  if (!hasUpvoted) {
-    hasUpvoted = true;
-    const currentCount = parseInt(likeCount.textContent, 10);
-    likeCount.textContent = currentCount + 1;
-    
-    // Add the 'liked' class to change color
-    thumbsUpIcon.classList.add('liked');
-    thumbsUpIcon.style.pointerEvents = 'none'; // Disable further clicks
-  }
-};
+// Append the like button to the upvotes span
+upvotes.appendChild(likeBtn);
 
-
-// Append the icon and like count to the upvotes span
-upvotes.appendChild(thumbsUpIcon);
-upvotes.appendChild(likeCount);
-
+// Now append the upvotes span to your comment element
 commentElement.appendChild(upvotes);
+
+
+
+// Use existing event listener for dynamic comments
+document.addEventListener('click', (event) => {
+  // Like functionality
+  if (event.target.closest('.like-btn')) {
+    const upvoteElement = event.target.closest('.like-btn');
+    const likeIcon = upvoteElement.querySelector('i');
+    let likeCountText = upvoteElement.querySelector('span').textContent;
+
+    // Parse the like count safely
+    let likeCountValue = parseInt(likeCountText);
+    if (isNaN(likeCountValue)) {
+      likeCountValue = 0; // Default to 0 if parsing fails
+    }
+
+    // Toggle the liked state
+    likeIcon.classList.toggle('liked');
+    if (likeIcon.classList.contains('liked')) {
+      likeCountValue += 1;
+    } else {
+      likeCountValue -= 1;
+    }
+
+    // Update the inner HTML correctly
+    upvoteElement.querySelector('span').textContent = likeCountValue; // Update the count text
+  }
+
+  // Comment functionality (e.g., reply box toggle)
+  if (event.target.closest('.comment-btn')) {
+    let commentBox = event.target.closest('.comment').querySelector('.reply-box');
+    commentBox.style.display = (commentBox.style.display === 'none' || !commentBox.style.display) ? 'block' : 'none';
+  }
+
+  // Handle reply submission
+  if (event.target.classList.contains('reply-submit')) {
+    const replyBox = event.target.previousElementSibling;
+    const userReply = replyBox.value.trim();
+    if (userReply !== "") {
+      const replyContainer = event.target.closest('.comment').querySelector('.user-reply');
+      replyContainer.innerHTML += `<p>${userReply}</p>`;
+      replyBox.value = ""; // Clear the input field after submission
+    }
+  }
+});
+
 
 
 
@@ -378,47 +418,47 @@ document.querySelector('audio').volume = 0.5;
 
 
 // Add event listeners for dynamically created comments
-document.addEventListener('click', (event) => {
-  // Like functionality
-  if (event.target.closest('.like-btn')) {
-    let upvoteElement = event.target.closest('.like-btn');
-    let likeIcon = upvoteElement.querySelector('i');
-    let likeCountText = upvoteElement.textContent.trim().split(' ')[1];
+// document.addEventListener('click', (event) => {
+//   // Like functionality
+//   if (event.target.closest('.like-btn')) {
+ //    let upvoteElement = event.target.closest('.like-btn');
+ //    let likeIcon = upvoteElement.querySelector('i');
+ //    let likeCountText = upvoteElement.textContent.trim().split(' ')[1];
 
     // Parse the like count safely
-    let likeCount = parseInt(likeCountText);
-    if (isNaN(likeCount)) {
-      likeCount = 0; // Default to 0 if parsing fails
-    }
+ //    let likeCount = parseInt(likeCountText);
+ //    if (isNaN(likeCount)) {
+//       likeCount = 0; // Default to 0 if parsing fails
+//     }
 
     // Toggle the liked state
-    likeIcon.classList.toggle('liked');
-    if (likeIcon.classList.contains('liked')) {
-      likeCount += 1;
-    } else {
-      likeCount -= 1;
-    }
+//     likeIcon.classList.toggle('liked');
+//     if (likeIcon.classList.contains('liked')) {
+//       likeCount += 1;
+//     } else {
+//       likeCount -= 1;
+//     }
 
     // Update the inner HTML correctly, ensuring the icon structure remains
-    upvoteElement.innerHTML = `<i class="fas fa-thumbs-up ${likeIcon.classList.contains('liked') ? 'liked' : ''}"></i> ${likeCount}`;
+//     upvoteElement.innerHTML = `<i class="fas fa-thumbs-up ${likeIcon.classList.contains('liked') ? 'liked' : ''}"></i> ${likeCount}`;
     // Re-append the like button to keep the structure intact
-    upvoteElement.appendChild(likeIcon);
-  }
+//     upvoteElement.appendChild(likeIcon);
+ //  }
 
   // Comment functionality (e.g., reply box toggle)
-  if (event.target.closest('.comment-btn')) {
-    let commentBox = event.target.closest('.comment').querySelector('.reply-box');
-    commentBox.style.display = (commentBox.style.display === 'none' || !commentBox.style.display) ? 'block' : 'none';
-  }
+ //  if (event.target.closest('.comment-btn')) {
+//     let commentBox = event.target.closest('.comment').querySelector('.reply-box');
+//     commentBox.style.display = (commentBox.style.display === 'none' || !commentBox.style.display) ? 'block' : 'none';
+//   }
 
   // Handle reply submission
-  if (event.target.classList.contains('reply-submit')) {
-    const replyBox = event.target.previousElementSibling;
-    const userReply = replyBox.value.trim();
-    if (userReply !== "") {
-      const replyContainer = event.target.closest('.comment').querySelector('.user-reply');
-      replyContainer.innerHTML += `<p>${userReply}</p>`;
-      replyBox.value = ""; // Clear the input field after submission
-    }
-  }
-});
+//   if (event.target.classList.contains('reply-submit')) {
+//     const replyBox = event.target.previousElementSibling;
+//     const userReply = replyBox.value.trim();
+//     if (userReply !== "") {
+//       const replyContainer = event.target.closest('.comment').querySelector('.user-reply');
+//       replyContainer.innerHTML += `<p>${userReply}</p>`;
+//       replyBox.value = ""; // Clear the input field after submission
+//     }
+//   }
+// });
