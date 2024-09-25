@@ -120,19 +120,92 @@ function addComment() {
   commentElement.appendChild(commentText);
 
   const upvotes = document.createElement('span');
-  upvotes.className = 'upvotes';
-  upvotes.innerHTML = `<i class="fas fa-thumbs-up"></i> ${Math.floor(Math.random() * 8)}`;
-  commentElement.appendChild(upvotes);
+upvotes.className = 'upvotes';
+
+// Create a like count element
+  const likeCount = document.createElement('span');
+  likeCount.className = 'likeCount'; // Class for styling if needed
+  likeCount.textContent = Math.floor(Math.random() * 8); // Initial random like count
+
+// Create the thumbs-up icon and make it clickable
+  const thumbsUpIcon = document.createElement('i');
+  thumbsUpIcon.className = 'fas fa-thumbs-up';
+  thumbsUpIcon.onclick = function() {
+  increaseLikes(this); // Call the increaseLikes function when clicked
+};
+
+// Append the icon and like count to the upvotes span
+upvotes.appendChild(thumbsUpIcon);
+upvotes.appendChild(likeCount);
+
+commentElement.appendChild(upvotes);
+
 
   const commentsBubble = document.createElement('span');
-  commentsBubble.className = 'commentsBubble';
-  commentsBubble.innerHTML = `<i class="fas fa-comment"></i> ${Math.floor(Math.random() * 4)}`;
-  commentElement.appendChild(commentsBubble);
+commentsBubble.className = 'commentsBubble';
+commentsBubble.innerHTML = `<i class="fas fa-comment"></i> ${Math.floor(Math.random() * 4)}`;
+
+// Create an input field for user comments
+const commentInput = document.createElement('input');
+commentInput.type = 'text';
+commentInput.placeholder = 'Type your comment...';
+commentInput.style.display = 'none'; // Initially hidden
+
+// Create a button to submit the comment
+const submitButton = document.createElement('button');
+submitButton.textContent = 'Send';
+submitButton.style.display = 'none'; // Initially hidden
+
+// Append the input and button to the comments bubble
+commentsBubble.appendChild(commentInput);
+commentsBubble.appendChild(submitButton);
+commentElement.appendChild(commentsBubble);
+
+// Click event to show the input and button when comments bubble is clicked
+commentsBubble.onclick = function() {
+  commentInput.style.display = 'block'; // Show the input
+  submitButton.style.display = 'block'; // Show the submit button
+};
+
+// Click event to handle the submit button click
+submitButton.onclick = function() {
+  const userComment = commentInput.value.trim(); // Get user comment
+  if (userComment) {
+    addUserComment(userComment); // Call a function to add the user's comment
+    commentInput.value = ''; // Clear the input
+    commentInput.style.display = 'none'; // Hide the input again
+    submitButton.style.display = 'none'; // Hide the button again
+  }
+};
+
+
+function addUserComment(comment) {
+  const feed = document.getElementById('feed');
+
+  const userCommentElement = document.createElement('div');
+  userCommentElement.className = 'userComment';
+
+  const userCommentText = document.createElement('p');
+  userCommentText.textContent = comment;
+  userCommentElement.appendChild(userCommentText);
+
+  feed.appendChild(userCommentElement);
+  feed.scrollTop = feed.scrollHeight; // Scroll to the bottom of the feed
+}
+
+
 
   const feed = document.getElementById('feed');
   feed.appendChild(commentElement);
 
   feed.scrollTop = feed.scrollHeight;
+
+function increaseLikes(element) {
+  const likeCountElement = element.nextElementSibling; // Get the like count span
+  let currentCount = parseInt(likeCountElement.textContent); // Get current like count
+  currentCount++; // Increase the count by 1
+  likeCountElement.textContent = currentCount; // Update the displayed count
+  }
 
   // Fade out older comments at a slower rate for better pacing
   if (feed.children.length > maxComments) {
