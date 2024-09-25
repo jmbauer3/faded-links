@@ -161,39 +161,34 @@ commentsBubble.innerHTML = `<i class="fas fa-comment"></i> ${Math.floor(Math.ran
 const commentInput = document.createElement('input');
 commentInput.type = 'text';
 commentInput.placeholder = 'Type your comment...';
+commentInput.className = 'commentInput'; // Add a class for styling
 commentInput.style.display = 'none'; // Initially hidden
+commentInput.style.width = '100%'; // Make the input take the full width
 
-// Create a button to submit the comment
-const submitButton = document.createElement('button');
-submitButton.textContent = 'Send';
-submitButton.style.display = 'none'; // Initially hidden
-
-// Append the input and button to the comments bubble
+// Append the input to the comments bubble
 commentsBubble.appendChild(commentInput);
-commentsBubble.appendChild(submitButton);
 commentElement.appendChild(commentsBubble);
 
-// Click event to show the input and button when comments bubble is clicked
+// Click event to show the input when comments bubble is clicked
 commentsBubble.onclick = function() {
   commentInput.style.display = 'block'; // Show the input
-  submitButton.style.display = 'block'; // Show the submit button
+  commentInput.focus(); // Automatically focus the input
 };
 
-// Click event to handle the submit button click
-submitButton.onclick = function() {
-  const userComment = commentInput.value.trim(); // Get user comment
-  if (userComment) {
-    addUserComment(userComment); // Call a function to add the user's comment
-    commentInput.value = ''; // Clear the input
-    commentInput.style.display = 'none'; // Hide the input again
-    submitButton.style.display = 'none'; // Hide the button again
+// Keydown event to handle submitting the comment on Enter
+commentInput.onkeydown = function(event) {
+  if (event.key === 'Enter') {
+    const userComment = commentInput.value.trim(); // Get user comment
+    if (userComment) {
+      addUserComment(userComment, commentElement); // Call a function to add the user's comment
+      commentInput.value = ''; // Clear the input
+      commentInput.style.display = 'none'; // Hide the input again
+    }
   }
 };
 
-
-function addUserComment(comment) {
-  const feed = document.getElementById('feed');
-
+// Update the addUserComment function to place comments under their parent comment
+function addUserComment(comment, parentCommentElement) {
   const userCommentElement = document.createElement('div');
   userCommentElement.className = 'userComment';
 
@@ -201,9 +196,14 @@ function addUserComment(comment) {
   userCommentText.textContent = comment;
   userCommentElement.appendChild(userCommentText);
 
-  feed.appendChild(userCommentElement);
+  // Append the user comment under its parent comment
+  parentCommentElement.appendChild(userCommentElement);
+
+  // Scroll to the bottom of the feed (if needed)
+  const feed = document.getElementById('feed');
   feed.scrollTop = feed.scrollHeight; // Scroll to the bottom of the feed
 }
+
 
 
 

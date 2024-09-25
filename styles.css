@@ -230,3 +230,13 @@ body {
 .upvotes .highlighted {
   color: #ffcc00; /* Change to your desired highlight color */
 }
+
+
+.commentInput {
+  background-color: #f0f0f0; /* Adjust this to fit your theme */
+  border: 1px solid #ccc; /* Border color */
+  border-radius: 5px; /* Rounded corners */
+  padding: 5px; /* Padding inside the input */
+  margin-top: 5px; /* Space above the input */
+  font-size: 14px; /* Font size for the input */
+}
