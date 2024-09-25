@@ -184,13 +184,14 @@ commentsBubble.onclick = function() {
 
 
 // Keydown event to handle submitting the comment on Enter
+// Keydown event to handle submitting the comment on Enter
 commentInput.onkeydown = function(event) {
   if (event.key === 'Enter') {
     const userComment = commentInput.value.trim(); // Get user comment
     if (userComment) {
-      addUserComment(userComment, commentElement); // Add user's comment
+      addUserComment(userComment, commentElement); // Call a function to add the user's comment
       commentInput.value = ''; // Clear the input
-      commentInput.classList.remove('visible'); // Hide the input again
+      commentInput.style.display = 'none'; // Hide the input after submission
     }
   }
 };
@@ -390,6 +391,7 @@ document.addEventListener('click', (event) => {
       likeCount = 0; // Default to 0 if parsing fails
     }
 
+    // Toggle the liked state
     likeIcon.classList.toggle('liked');
     if (likeIcon.classList.contains('liked')) {
       likeCount += 1;
@@ -397,8 +399,10 @@ document.addEventListener('click', (event) => {
       likeCount -= 1;
     }
 
-    // Update the inner HTML correctly
+    // Update the inner HTML correctly, ensuring the icon structure remains
     upvoteElement.innerHTML = `<i class="fas fa-thumbs-up ${likeIcon.classList.contains('liked') ? 'liked' : ''}"></i> ${likeCount}`;
+    // Re-append the like button to keep the structure intact
+    upvoteElement.appendChild(likeIcon);
   }
 
   // Comment functionality (e.g., reply box toggle)
