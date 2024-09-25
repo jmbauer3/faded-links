@@ -214,23 +214,12 @@ commentsBubble.onclick = function() {
 // Keydown event to handle submitting the comment on Enter
 // Keydown event to handle submitting the comment on Enter
 
-function updateCommentCount(element, count) {
-  element.innerHTML = `<i class="fas fa-comment"></i> ${count}`;
-}
+// function updateCommentCount(element, count) {
+//  element.innerHTML = `<i class="fas fa-comment"></i> ${count}`;
+// }
 
 
-commentInput.onkeydown = function(event) {
-  if (event.key === 'Enter') {
-    const userComment = commentInput.value.trim(); // Get user comment
-    if (userComment) {
-      addUserComment(userComment, commentElement); // Call a function to add the user's comment
-      commentInput.value = ''; // Clear the input
-      commentInput.style.display = 'none'; // Hide the input after submission
-      totalCommentCount++;
-  updateCommentCount(commentsBubble, totalCommentCount); // Increment comment count
-    }
-  }
-};
+
 
 // Update the addUserComment function to place comments under their parent comment
 // Function to add user comments under the parent comment
@@ -255,8 +244,23 @@ function addUserComment(userComment, parentCommentElement) {
 }
 
 
+const commentsBubble = parentCommentElement.querySelector('.commentsBubble');
 
+  // Update the count in the comments bubble
+  let currentCount = parseInt(commentsBubble.innerText.match(/\d+/)[0]) || 0; // Get the current count
+  commentsBubble.innerHTML = `<i class="fas fa-comment"></i> ${currentCount + 1}`; // Increment the count
+}
 
+commentInput.onkeydown = function(event) {
+  if (event.key === 'Enter') {
+    const userComment = commentInput.value.trim(); // Get user comment
+    if (userComment) {
+      addUserComment(userComment, commentElement); // Call a function to add the user's comment
+      commentInput.value = ''; // Clear the input
+      commentInput.style.display = 'none'; // Hide the input after submission
+    }
+  }
+};
 
 
 
