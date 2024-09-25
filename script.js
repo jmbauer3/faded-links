@@ -120,97 +120,122 @@ function addComment() {
   commentElement.appendChild(commentText);
 
   const upvotes = document.createElement('span');
-  upvotes.className = 'upvotes';
+upvotes.className = 'upvotes';
 
-  // Create a like count element
-  const likeCount = document.createElement('span');
-  likeCount.className = 'likeCount'; // Class for styling if needed
-  likeCount.textContent = Math.floor(Math.random() * 8); // Initial random like count
+// Create a like count element
+const likeCount = document.createElement('span');
+likeCount.className = 'likeCount'; // Class for styling if needed
+likeCount.textContent = Math.floor(Math.random() * 8); // Initial random like count
 
-  // Create the thumbs-up icon and make it clickable
-  const thumbsUpIcon = document.createElement('i');
-  thumbsUpIcon.className = 'fas fa-thumbs-up';
+// Create the thumbs-up icon and make it clickable
+const thumbsUpIcon = document.createElement('i');
+thumbsUpIcon.className = 'fas fa-thumbs-up';
 
-  // Variable to track if the upvote has been made
-  let hasUpvoted = false;
+// Variable to track if the upvote has been made
+let hasUpvoted = false;
 
-  // Click handler for the thumbs-up icon
-  thumbsUpIcon.onclick = function() {
-    if (!hasUpvoted) {
-      hasUpvoted = true;
-      const currentCount = parseInt(likeCount.textContent, 10);
-      likeCount.textContent = currentCount + 1;
-      
-      // Add the 'liked' class to change color
-      thumbsUpIcon.classList.add('liked');
-      thumbsUpIcon.style.pointerEvents = 'none'; // Disable further clicks
-    }
-  };
-
-  // Append the icon and like count to the upvotes span
-  upvotes.appendChild(thumbsUpIcon);
-  upvotes.appendChild(likeCount);
-  commentElement.appendChild(upvotes);
-
-  // Make sure to attach the comment button properly
-  const commentsBubble = document.createElement('span');
-  commentsBubble.className = 'commentsBubble comment-btn';
-  commentsBubble.innerHTML = `<i class="fas fa-comment"></i> ${Math.floor(Math.random() * 4)}`; // Icon + random number
-
-  // Create an input field for user comments
-  const commentInput = document.createElement('input');
-  commentInput.className = 'comment-input'; // Assign the correct class for styling
-  commentInput.type = 'text';
-  commentInput.placeholder = 'In the silence, I wonder...';
-  commentInput.style.display = 'none'; // Hidden initially
-
-  // Append the input to the comments bubble
-  commentElement.appendChild(commentsBubble); // Append comment icon to the comment element
-  commentElement.appendChild(commentInput); // Append the comment input box
-
-  // Click event to show the input when the comments bubble is clicked
-  commentsBubble.onclick = function() {
-    commentInput.classList.toggle('visible'); // Toggle visibility using CSS class
-    commentInput.focus(); // Automatically focus the input
-  };
-
-  // Keydown event to handle submitting the comment on Enter
-  commentInput.onkeydown = function(event) {
-    if (event.key === 'Enter') {
-      const userComment = commentInput.value.trim(); // Get user comment
-      if (userComment) {
-        addUserComment(userComment, commentElement); // Call a function to add the user's comment
-        commentInput.value = ''; // Clear the input
-        commentInput.style.display = 'none'; // Hide the input after submission
-      }
-    }
-  };
-
-  // Function to add user comments under the parent comment
-  function addUserComment(userComment, parentCommentElement) {
-    const userCommentElement = document.createElement('div');
-    userCommentElement.className = 'user-comment';
+// Click handler for the thumbs-up icon
+thumbsUpIcon.onclick = function() {
+  if (!hasUpvoted) {
+    hasUpvoted = true;
+    const currentCount = parseInt(likeCount.textContent, 10);
+    likeCount.textContent = currentCount + 1;
     
-    // Apply similar styling to the parent comment
-    userCommentElement.style.backgroundColor = '#333344'; // Match the theme
-    userCommentElement.style.padding = '10px';
-    userCommentElement.style.marginTop = '5px';
-    userCommentElement.style.borderRadius = '5px';
-    userCommentElement.style.border = '1px solid #5a5a8a'; // Match border color
-    
-    const userCommentText = document.createElement('p');
-    userCommentText.textContent = userComment;
-
-    userCommentElement.appendChild(userCommentText);
-    
-    // Append the user's comment under the parent comment
-    parentCommentElement.appendChild(userCommentElement);
+    // Add the 'liked' class to change color
+    thumbsUpIcon.classList.add('liked');
+    thumbsUpIcon.style.pointerEvents = 'none'; // Disable further clicks
   }
+};
+
+
+// Append the icon and like count to the upvotes span
+upvotes.appendChild(thumbsUpIcon);
+upvotes.appendChild(likeCount);
+
+commentElement.appendChild(upvotes);
+
+
+
+// Make sure to attach the comment button properly
+const commentsBubble = document.createElement('span');
+commentsBubble.className = 'commentsBubble comment-btn';
+commentsBubble.innerHTML = `<i class="fas fa-comment"></i> ${Math.floor(Math.random() * 4)}`; // Icon + random number
+
+// Create an input field for user comments
+const commentInput = document.createElement('input');
+commentInput.className = 'comment-input'; // Assign the correct class for styling
+commentInput.type = 'text';
+commentInput.placeholder = 'In the silence, I wonder...';
+commentInput.style.display = 'none'; // Hidden initially
+
+// Append the input to the comments bubble
+commentElement.appendChild(commentsBubble); // Append comment icon to the comment element
+commentElement.appendChild(commentInput); // Append the comment input box
+
+// Click event to show the input when the comments bubble is clicked
+commentsBubble.onclick = function() {
+  if (commentInput.style.display === 'none') {
+    commentInput.style.display = 'block'; // Show the input
+  } else {
+    commentInput.style.display = 'none'; // Hide the input if clicked again
+  }
+  commentInput.focus(); // Automatically focus the input
+};
+
+
+// Keydown event to handle submitting the comment on Enter
+// Keydown event to handle submitting the comment on Enter
+commentInput.onkeydown = function(event) {
+  if (event.key === 'Enter') {
+    const userComment = commentInput.value.trim(); // Get user comment
+    if (userComment) {
+      addUserComment(userComment, commentElement); // Call a function to add the user's comment
+      commentInput.value = ''; // Clear the input
+      commentInput.style.display = 'none'; // Hide the input after submission
+    }
+  }
+};
+
+// Update the addUserComment function to place comments under their parent comment
+// Function to add user comments under the parent comment
+function addUserComment(userComment, parentCommentElement) {
+  const userCommentElement = document.createElement('div');
+  userCommentElement.className = 'user-comment';
+  
+  // Apply similar styling to the parent comment
+  userCommentElement.style.backgroundColor = '#333344'; // Match the theme
+  userCommentElement.style.padding = '10px';
+  userCommentElement.style.marginTop = '5px';
+  userCommentElement.style.borderRadius = '5px';
+  userCommentElement.style.border = '1px solid #5a5a8a'; // Match border color
+  
+  const userCommentText = document.createElement('p');
+  userCommentText.textContent = userComment;
+
+  userCommentElement.appendChild(userCommentText);
+  
+  // Append the user's comment under the parent comment
+  parentCommentElement.appendChild(userCommentElement);
+}
+
+
+
+
+
 
   const feed = document.getElementById('feed');
   feed.appendChild(commentElement);
 
   feed.scrollTop = feed.scrollHeight;
+
+function increaseLikes(element) {
+  const likeCountElement = element.nextElementSibling; // Get the like count span
+  let currentCount = parseInt(likeCountElement.textContent); // Get current like count
+  currentCount++; // Increase the count by 1
+  likeCountElement.textContent = currentCount; // Update the displayed count
+  }
+
+
 
   // Fade out older comments at a slower rate for better pacing
   if (feed.children.length > maxComments) {
@@ -221,7 +246,6 @@ function addComment() {
     }, 1500); // Slightly longer fade duration for a smoother exit
   }
 }
-
 
 // YouTube API Section
 let player;
